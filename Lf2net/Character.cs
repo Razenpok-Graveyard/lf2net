@@ -48,23 +48,13 @@ namespace Lf2net
                 isIdle = false;
                 faceRight = false;
             }
-            if (InputHandler.KeyDown(Keys.Right) && Position.Y > walkSpeed.X)
+            if (InputHandler.KeyDown(Keys.Right) && Position.X < battlefield.Width - walkSpeed.X)
             {
                 Position += new Vector2(walkSpeed.X/2, 0);
                 isIdle = false;
                 faceRight = true;
             }
             state = isIdle ? idle : walk;
-        }
-
-        public void ChangeState()
-        {
-            if (state == idle)
-                state = walk;
-            else if (state == walk)
-                state = run;
-            else if (state == run)
-                state = idle;
         }
 
         public void Update()
