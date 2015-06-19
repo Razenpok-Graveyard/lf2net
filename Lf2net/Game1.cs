@@ -43,7 +43,7 @@ namespace Lf2net
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            var textureDavis = Content.Load<Texture2D>("davis_0");
+            var textureDavis = Content.Load<Texture2D>("Characters/Davis/davis_0");
             var davisAtlas = new SpriteAtlas(textureDavis, 7, 10);
             var davisIdle = new Animation(davisAtlas, new[]{0, 1, 2, 3});
             var davisWalk = new Animation(davisAtlas, new[] { 4, 5, 6, 7, 6, 5 });

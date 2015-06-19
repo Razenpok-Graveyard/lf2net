@@ -55,8 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\davis_0.png" />
-    <Content Include="Content\deep_0.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
