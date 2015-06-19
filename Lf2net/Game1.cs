@@ -12,7 +12,7 @@ namespace Lf2net
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Character davis;
+        private BattleField testBF;
 
         public Game1()
         {
@@ -43,12 +43,20 @@ namespace Lf2net
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            LoadBattleField();
+        }
+
+        private void LoadBattleField()
+        {
+            var testBfFloor = Content.Load<Texture2D>("bg/cuhk/floor3");
+            testBF = new BattleField(testBfFloor);
             var textureDavis = Content.Load<Texture2D>("Characters/Davis/davis_0");
             var davisAtlas = new SpriteAtlas(textureDavis, 7, 10);
-            var davisIdle = new Animation(davisAtlas, new[]{0, 1, 2, 3});
+            var davisIdle = new Animation(davisAtlas, new[] { 0, 1, 2, 3 });
             var davisWalk = new Animation(davisAtlas, new[] { 4, 5, 6, 7, 6, 5 });
             var davisRun = new Animation(davisAtlas, new[] { 20, 21, 22, 21 });
-            davis = new Character(davisIdle, davisWalk, davisRun);
+            var davis = new Character(testBF, davisIdle, davisWalk, davisRun);
+            testBF.AddCharacter(davis);
         }
 
         /// <summary>
@@ -70,9 +78,7 @@ namespace Lf2net
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
-            if (InputHandler.KeyPressed(Keys.Enter))
-                davis.ChangeState();
-            davis.Update();
+            testBF.Update();
             base.Update(gameTime);
         }
 
@@ -84,7 +90,7 @@ namespace Lf2net
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            davis.Draw(spriteBatch);
+            testBF.Draw(spriteBatch);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
