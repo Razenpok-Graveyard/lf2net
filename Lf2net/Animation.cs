@@ -15,6 +15,14 @@ namespace Lf2net
         private int delay = 7;
         private int currentTime;
 
+        public Texture2D CurrentFrame
+        {
+            get
+            {
+                return atlas[frames.Current];
+            }
+        }
+
         public Animation(SpriteAtlas atlas, IEnumerable<int> frames)
         {
             this.atlas = atlas;
@@ -37,18 +45,6 @@ namespace Lf2net
         {
             frames.Reset();
             frames.MoveNext();
-        }
-
-        private Texture2D GetCurrentFrame()
-        {
-            return atlas[frames.Current];
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
-        {
-            spriteBatch.Begin();
-            spriteBatch.Draw(GetCurrentFrame(), location, Color.White);
-            spriteBatch.End();
         }
     }
 }

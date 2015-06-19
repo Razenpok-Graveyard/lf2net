@@ -40,7 +40,9 @@ namespace Lf2net
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            state.Draw(spriteBatch, position);
+            spriteBatch.Begin();
+            spriteBatch.Draw(state.CurrentFrame, position, Color.White);
+            spriteBatch.End();
         }
     }
 }
