@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Lf2datConverter
 {
@@ -14,10 +15,13 @@ namespace Lf2datConverter
             var fileName = "davis.dat";//Console.ReadLine();
             if (fileName == null || !File.Exists(fileName)) return;
             // First 123 bytes of lf2 .dat files are useless
-            var bytes = File.ReadAllBytes(fileName).Skip(123);
+            var bytes = File.ReadAllBytes(fileName)
+                .Skip(123);
             var text = Decryptor.DecryptByteSequence(bytes);
             var ch = Converter.ConvertDat(text);
             File.WriteAllText(fileName.Split('.')[0] + ".txt", text);
+            var json = JsonConvert.SerializeObject(ch, Formatting.Indented);
+            File.WriteAllText(fileName.Split('.')[0] + ".json", json);
         }
     }
 }

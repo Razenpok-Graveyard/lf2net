@@ -14,7 +14,9 @@ namespace Lf2datConverter
         public static string DecryptByteSequence(IEnumerable<byte> byteStream)
         {
             EncryptionKey.Reset();
-            return new string(byteStream.Select(DecryptByte).ToArray());
+            return new string(byteStream
+                .Select(DecryptByte)
+                .ToArray());
         }
 
         static readonly Func<byte, char> DecryptByte = b => (char)(b - NextEncryptionByte);
