@@ -10,12 +10,12 @@ namespace Lf2datConverter
     public struct Block
     {
         public string Name;
-        public List<string> Lines;
+        public Dictionary<string, string> Fields;
 
         public Block(string name)
         {
             Name = name;
-            Lines = new List<string>();
+            Fields = new Dictionary<string, string>();
         }
     }
 
@@ -33,6 +33,8 @@ namespace Lf2datConverter
         {
             var result = new List<Block>();
             var currentBlock = new Block();
+            var currentFrameElement = "";
+            var currentFrameElementContents = "";
             foreach (var line in lines)
             {
                 if (line.Contains("<bmp_begin>"))
@@ -43,8 +45,9 @@ namespace Lf2datConverter
                 if (line.Contains("<frame>"))
                 {
                     currentBlock = new Block("frame");
-                    var firstLine = line.Substring(8);
-                    currentBlock.Lines.Add(firstLine);
+                    var firstLine = line.Substring(8).Split(' ');
+                    currentBlock.Fields.Add("Number", firstLine[0]);
+                    currentBlock.Fields.Add("Name", firstLine[1]);
                     continue;
                 }
                 if (line.Contains("<bmp_end>") || line.Contains("<frame_end>"))
@@ -53,7 +56,49 @@ namespace Lf2datConverter
                     currentBlock = new Block();
                     continue;
                 }
-                currentBlock.Lines.Add(line);
+                var parts = line.Split(new[] {" ", ":"}, StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length == 0) continue;
+                if (parts.Length == 1)
+                {
+                    if (parts[0].Contains("end"))
+                    {
+                        if (currentBlock.Fields.ContainsKey(currentFrameElement))
+                        {
+                            currentBlock.Fields[currentFrameElement] += " | " + currentFrameElementContents;
+                        }
+                        else
+                        {
+                            currentBlock.Fields.Add(currentFrameElement, currentFrameElementContents);
+                        }
+                        currentFrameElement = "";
+                        currentFrameElementContents = "";
+                    }
+                    else
+                    {
+                        currentFrameElement = parts[0];
+                    }
+                    continue;
+                }
+                if (parts[0].Contains("file"))
+                {
+                    if (!currentBlock.Fields.ContainsKey("SpriteFiles"))
+                    {
+                        currentBlock.Fields["SpriteFiles"] = "";
+                    }
+                    currentBlock.Fields["SpriteFiles"] += line + " ";
+                    continue;
+                }
+                if (currentFrameElement != "")
+                {
+                    currentFrameElementContents += line;
+                }
+                else
+                {
+                    for (var i = 0; i < parts.Length; i += 2)
+                    {
+                        currentBlock.Fields.Add(parts[i], parts[i+1]);
+                    }
+                }
             }
             return result;
         }
@@ -73,7 +118,7 @@ namespace Lf2datConverter
             var result = new Character();
             if (block.Name != "bmp")
                 return null;
-            var splittedBlock = block.Lines
+            /*var splittedBlock = block.Fields
                 .Select(line => line.Split(new []{" ", ":"}, StringSplitOptions.RemoveEmptyEntries));
             foreach (var parts in splittedBlock)
             {
@@ -83,8 +128,8 @@ namespace Lf2datConverter
                     result.SpriteFiles.Add(ParseSpriteFile(parts));
                     continue;
                 }
-                var fieldData = parts[1];
-                switch (parts[0])
+                var fieldData = parts[1];*/
+                /*switch (parts[0])
                 {
                     case "name":
                     {
@@ -101,7 +146,12 @@ namespace Lf2datConverter
                         result.Small = fieldData;
                         break;
                     }
-                       /* case "name":
+                        case "walking_frame_rate":
+                    {
+                        result.WalkingFrameRate = int.Parse(fieldData);
+                        break;
+                    }
+                        case "walking_speed":
                     {
                         result.Name = fieldData;
                         break;
@@ -111,26 +161,17 @@ namespace Lf2datConverter
                         result.Name = fieldData;
                         break;
                     }
-                        case "name":
+                        case "running_frame_rate":
                     {
-                        result.Name = fieldData;
+                        result.RunningFrameRate = int.Parse(fieldData);
                         break;
                     }
-                        case "name":
-                    {
-                        result.Name = fieldData;
-                        break;
-                    }*/
 
-                }
-            }
+                }*/
+            //}
             return result;
         }
         /*
-        name: Davis
-head: sprite\sys\davis_f.bmp
-small: sprite\sys\davis_s.bmp
-walking_frame_rate 3
 walking_speed 5.000000
 walking_speedz 2.500000
 running_frame_rate 3
