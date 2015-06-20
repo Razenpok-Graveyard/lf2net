@@ -79,7 +79,7 @@
     <Compile Include="dat\Convenient\FrameElements\CaughtPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\FrameElement.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\Catch.cs" />
-    <Compile Include="dat\Convenient\FrameElements\Interfaces\I2DMovableElement.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interfaces\IMovementProducingElement.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\CatchBody.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\CatchDOP.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\Falling.cs" />
@@ -95,6 +95,8 @@
     <Compile Include="dat\Convenient\FrameElements\Interactions\SuperPunch.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\WeaponStrength.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\WindWhirlWind.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interfaces\IDamagingInteraction.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interfaces\IHittableInteraction.cs" />
     <Compile Include="dat\Convenient\FrameElements\ObjectPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interfaces\IPointFrameElement.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interfaces\IRectangularFrameElement.cs" />

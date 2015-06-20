@@ -1,8 +1,10 @@
-﻿namespace Lf2datConverter.dat.Convenient
+﻿using Microsoft.Xna.Framework;
+
+namespace Lf2datConverter.dat.Convenient
 {
-    class HealBall: Interaction
+    class HealBall: Interaction, IDamagingInteraction, IMovementProducingElement
     {
-        public int DVX;
-        public int Injury;
+        public int Injury { get; set; }
+        public Vector3 VelocityDelta { get; set; }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class SuperPunch: Interaction
+    class SuperPunch: Interaction, IHittableInteraction
     {
-        public int VRest;
+        public int VRest { get; set; }
     }
 }

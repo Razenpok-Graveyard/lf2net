@@ -2,8 +2,8 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class PickWeapon2: Interaction
+    class PickWeapon2: Interaction, IHittableInteraction
     {
-        public int VRest;
+        public int VRest { get; set; }
     }
 }

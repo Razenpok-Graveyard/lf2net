@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework;
 
 namespace Lf2datConverter.dat.Convenient
 {
-    interface I2DMovableElement
+    interface IMovementProducingElement
     {
-        Point VelocityDelta { get; set; }
+        Vector3 VelocityDelta { get; set; }
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class WeaponStrength: Interaction
+    class WeaponStrength: Interaction, IDamagingInteraction, IMovementProducingElement
     {
-        public int DVX;
         public int Fall;
         public int BDefend;
-        public int Injury;
+        public int Injury { get; set; }
+        public Vector3 VelocityDelta { get; set; }
     }
 }

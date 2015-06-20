@@ -97,7 +97,7 @@ namespace Lf2datConverter
                             DVZ = weaponPoint.DVZ,
                             WeaponAct = weaponPoint.WeaponAct,
                             Position = new Point(weaponPoint.X, weaponPoint.Y),
-                            VelocityDelta = new Point(weaponPoint.DVX, weaponPoint.DVY)
+                            VelocityDelta = new Vector3(weaponPoint.DVX, weaponPoint.DVY, 0)
                         };
                     break;
                 }
@@ -109,12 +109,11 @@ namespace Lf2datConverter
                         convFrameElement = new ObjectPoint
                         {
                             Action = objectPoint.Action,
-                            DVX = objectPoint.DVX,
-                            DVY = objectPoint.DVY,
                             Facing = objectPoint.Facing,
                             Kind = objectPoint.Kind,
-                            OID = objectPoint.OID,
-                            Position = new Point(objectPoint.X, objectPoint.Y)
+                            ObjectID = objectPoint.OID,
+                            Position = new Point(objectPoint.X, objectPoint.Y),
+                            VelocityDelta = new Vector3(objectPoint.DVX, objectPoint.DVY, 0)
                         };
                     }
                     break;
@@ -135,10 +134,9 @@ namespace Lf2datConverter
                             JAction = catchingPoint.JAction,
                             TAction = catchingPoint.TAction,
                             ThrowInjury = catchingPoint.ThrowInjury,
-                            ThrowVZ = catchingPoint.ThrowVZ,
                             VAction = catchingPoint.VAction,
                             Position = new Point(catchingPoint.X, catchingPoint.Y),
-                            VelocityDelta = new Point(catchingPoint.ThrowVX, catchingPoint.ThrowVY)
+                            VelocityDelta = new Vector3(catchingPoint.ThrowVX, catchingPoint.ThrowVY, catchingPoint.ThrowVZ)
                         };
                     }
                     break;
@@ -197,7 +195,7 @@ namespace Lf2datConverter
                             Injury = normalHit.Injury,
                             VRest = normalHit.VRest,
                             ZWidth = normalHit.ZWidth,
-                            VelocityDelta = new Point(normalHit.DVX, normalHit.DVY)
+                            VelocityDelta = new Vector3(normalHit.DVX, normalHit.DVY, 0)
                         };
                     }
                     break;
@@ -256,10 +254,10 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(falling.X, falling.Y, falling.W, falling.H),
                             BDefend = falling.BDefend,
-                            DVX = falling.DVX,
                             Fall = falling.Fall,
                             Injury = falling.Injury,
-                            VRest = falling.VRest
+                            VRest = falling.VRest,
+                            VelocityDelta = new Vector3(falling.DVX, 0, 0)
                         };
                     }
                     break;
@@ -273,9 +271,9 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(weaponStrength.X, weaponStrength.Y, weaponStrength.W, weaponStrength.H),
                             BDefend = weaponStrength.BDefend,
-                            DVX = weaponStrength.DVX,
                             Fall = weaponStrength.Fall,
-                            Injury = weaponStrength.Injury
+                            Injury = weaponStrength.Injury,
+                            VelocityDelta = new Vector3(weaponStrength.DVX, 0, 0)
                         };
                     }
                     break;
@@ -314,8 +312,8 @@ namespace Lf2datConverter
                         convFrameElement = new HealBall
                         {
                             Area = new Rectangle(healBall.X, healBall.Y, healBall.W, healBall.H),
-                            DVX = healBall.DVX,
-                            Injury = healBall.Injury
+                            Injury = healBall.Injury,
+                            VelocityDelta = new Vector3(healBall.DVX, 0, 0)
                         };
                     }
                     break;
@@ -328,10 +326,10 @@ namespace Lf2datConverter
                         convFrameElement = new ReflectiveShield
                         {
                             Area = new Rectangle(reflectiveShield.X, reflectiveShield.Y, reflectiveShield.W, reflectiveShield.H),
-                            DVX = reflectiveShield.DVX,
                             Fall = reflectiveShield.Fall,
                             Injury = reflectiveShield.Injury,
-                            VRest = reflectiveShield.VRest
+                            VRest = reflectiveShield.VRest,
+                            VelocityDelta = new Vector3(reflectiveShield.DVX, 0, 0)
                         };
                     }
                     break;
@@ -392,7 +390,7 @@ namespace Lf2datConverter
                             Injury = windWhirlWind.Injury,
                             VRest = windWhirlWind.VRest,
                             ZWidth = windWhirlWind.ZWidth,
-                            VelocityDelta = new Point(windWhirlWind.DVX, windWhirlWind.DVY)
+                            VelocityDelta = new Vector3(windWhirlWind.DVX, windWhirlWind.DVY, 0)
                         };
                     }
                     break;
@@ -410,7 +408,7 @@ namespace Lf2datConverter
                             Injury = frostWhirlWind.Injury,
                             VRest = frostWhirlWind.VRest,
                             ZWidth = frostWhirlWind.ZWidth,
-                            VelocityDelta = new Point(frostWhirlWind.DVX, frostWhirlWind.DVY)
+                            VelocityDelta = new Vector3(frostWhirlWind.DVX, frostWhirlWind.DVY, 0)
                         };
                     }
                     break;

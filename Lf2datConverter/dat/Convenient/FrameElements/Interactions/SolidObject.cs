@@ -2,8 +2,8 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class SolidObject: Interaction
+    class SolidObject: Interaction, IHittableInteraction
     {
-        public int VRest;
+        public int VRest { get; set; }
     }
 }

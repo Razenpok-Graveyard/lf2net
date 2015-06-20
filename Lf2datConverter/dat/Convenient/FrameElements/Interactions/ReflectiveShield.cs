@@ -2,11 +2,11 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class ReflectiveShield: Interaction
+    class ReflectiveShield: Interaction, IHittableInteraction, IDamagingInteraction, IMovementProducingElement
     {
-        public int DVX;
-        public int VRest;
         public int Fall;
-        public int Injury;
+        public int VRest { get; set; }
+        public int Injury { get; set; }
+        public Vector3 VelocityDelta { get; set; }
     }
 }
