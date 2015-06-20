@@ -1,6 +1,6 @@
 ﻿namespace Lf2datConverter.dat.Base
 {
-    class CaughtPoint: CatchPoint
+    class CaughtPoint: FrameElement
     {
         public int X;
         public int Y;

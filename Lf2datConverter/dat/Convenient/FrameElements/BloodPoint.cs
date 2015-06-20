@@ -2,7 +2,5 @@
 {
     class BloodPoint: FrameElement
     {
-        public int X;
-        public int Y;
     }
 }

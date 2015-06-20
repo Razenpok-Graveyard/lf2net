@@ -2,8 +2,6 @@
 {
     class CatchingPoint: CatchPoint
     {
-        public int X;
-        public int Y;
         public int Injury;
         public int VAction;
         public int AAction;

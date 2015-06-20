@@ -27,7 +27,7 @@ namespace Lf2datConverter
 
     public class FrameElementBlock : Block { }
 
-    public class Dat
+    public class SourceDat
     {
         public BmpBlock Bmp;
         public List<FrameBlock> Frames= new List<FrameBlock>();
@@ -38,14 +38,14 @@ namespace Lf2datConverter
         public static Character ParseDat(string dat)
         {
             var lines = dat.Split(new[] {"\n"}, StringSplitOptions.RemoveEmptyEntries);
-            var blocks = GetBlocks(lines);
-            var character = ParseCharacter(blocks);
+            var sourceDat = GetSourceDat(lines);
+            var character = ParseCharacter(sourceDat);
             return character;
         }
 
-        private static Dat GetBlocks(IEnumerable<string> lines)
+        private static SourceDat GetSourceDat(IEnumerable<string> lines)
         {
-            var dat = new Dat();
+            var dat = new SourceDat();
             var bmp = new BmpBlock {Name = "bmp"};
             var currentFrame = new FrameBlock();
             var currentFields = new Dictionary<string, string>();
@@ -121,11 +121,11 @@ namespace Lf2datConverter
             return dat;
         }
 
-        private static Character ParseCharacter(Dat dat)
+        private static Character ParseCharacter(SourceDat sourceDat)
         {
-            var result = ParseBmp(dat.Bmp);
+            var result = ParseBmp(sourceDat.Bmp);
             if (result == null) return null;
-            result.Frames = dat.Frames
+            result.Frames = sourceDat.Frames
                 .Select(ParseFrame)
                 .ToList();
             return result;
@@ -251,13 +251,13 @@ namespace Lf2datConverter
                         DVZ = ParseInt(fields, "dvz"),
                         WeaponAct = ParseInt(fields, "weaponact"),
                         X = ParseInt(fields, "x"),
-                        Y = ParseInt(fields, "y"),
+                        Y = ParseInt(fields, "y")
                     };
                     break;
                 }
                 case "opoint":
                 {
-                    frameElement = new ObjectPoint()
+                    frameElement = new ObjectPoint
                     {
                         Action = ParseInt(fields, "action"),
                         DVX = ParseInt(fields, "dvx"),
@@ -274,7 +274,7 @@ namespace Lf2datConverter
                 {
                     var kind = ParseInt(fields, "kind");
                     if (kind == 1)
-                        frameElement = new CatchingPoint()
+                        frameElement = new CatchingPoint
                         {
                             AAction = ParseInt(fields, "aaction"),
                             Cover = ParseInt(fields, "cover"),
@@ -293,7 +293,7 @@ namespace Lf2datConverter
                             Y = ParseInt(fields, "y")
                         };
                     if (kind == 2)
-                        frameElement = new CaughtPoint()
+                        frameElement = new CaughtPoint
                         {
                             BackHurtAct = ParseInt(fields, "backhurtact"),
                             FrontHurtAct = ParseInt(fields, "fronthurtact"),
@@ -304,7 +304,7 @@ namespace Lf2datConverter
                 }
                 case "bpoint":
                 {
-                    frameElement = new BloodPoint()
+                    frameElement = new BloodPoint
                     {
                         X = ParseInt(fields, "x"),
                         Y = ParseInt(fields, "y")
@@ -313,7 +313,7 @@ namespace Lf2datConverter
                 }
                 case "bdy":
                 {
-                    frameElement = new Body()
+                    frameElement = new Body
                     {
                         H = ParseInt(fields, "h"),
                         Kind = ParseInt(fields, "kind"),
@@ -330,7 +330,7 @@ namespace Lf2datConverter
                     {
                         case 0:
                         {
-                            frameElement = new NormalHit()
+                            frameElement = new NormalHit
                             {
                                 ARest = ParseInt(fields, "arest"),
                                 BDefend = ParseInt(fields, "bdefend"),
@@ -352,7 +352,7 @@ namespace Lf2datConverter
                         {
                             var catchingAct = ParseString(fields, "catchingact").Split(' ');  
                             var caughtAct = ParseString(fields, "caughtact").Split(' ');
-                            frameElement = new CatchDoP()
+                            frameElement = new CatchDoP
                             {
                                 CatchingActBack = int.Parse(catchingAct[1]),
                                 CatchingActFront = int.Parse(catchingAct[0]),
@@ -367,13 +367,13 @@ namespace Lf2datConverter
                         }
                         case 2:
                         {
-                            frameElement = new PickWeapon()
+                            frameElement = new PickWeapon
                             {
                                 H = ParseInt(fields, "h"),
                                 VRest = ParseInt(fields, "vrest"),
                                 W = ParseInt(fields, "w"),
                                 X = ParseInt(fields, "x"),
-                                Y = ParseInt(fields, "y"),
+                                Y = ParseInt(fields, "y")
                             };
                             break;
                         }
@@ -381,7 +381,7 @@ namespace Lf2datConverter
                         {
                             var catchingAct = ParseString(fields, "catchingact").Split(' ');
                             var caughtAct = ParseString(fields, "caughtact").Split(' ');
-                            frameElement = new CatchBody()
+                            frameElement = new CatchBody
                             {
                                 CatchingActBack = int.Parse(catchingAct[1]),
                                 CatchingActFront = int.Parse(catchingAct[0]),
@@ -396,7 +396,7 @@ namespace Lf2datConverter
                         }
                         case 4:
                         {
-                            frameElement = new Falling()
+                            frameElement = new Falling
                             {
                                 BDefend = ParseInt(fields, "bdefend"),
                                 DVX = ParseInt(fields, "dvx"),
@@ -412,7 +412,7 @@ namespace Lf2datConverter
                         }
                         case 5:
                         {
-                            frameElement = new WeaponStrength()
+                            frameElement = new WeaponStrength
                             {
                                 BDefend = ParseInt(fields, "bdefend"),
                                 DVX = ParseInt(fields, "dvx"),
@@ -427,7 +427,7 @@ namespace Lf2datConverter
                         }
                         case 6:
                         {
-                            frameElement = new SuperPunch()
+                            frameElement = new SuperPunch
                             {
                                 H = ParseInt(fields, "h"),
                                 VRest = ParseInt(fields, "vrest"),
@@ -439,7 +439,7 @@ namespace Lf2datConverter
                         }
                         case 7:
                         {
-                            frameElement = new PickWeapon2()
+                            frameElement = new PickWeapon2
                             {
                                 H = ParseInt(fields, "h"),
                                 VRest = ParseInt(fields, "vrest"),
@@ -451,7 +451,7 @@ namespace Lf2datConverter
                         }
                         case 8:
                         {
-                            frameElement = new HealBall()
+                            frameElement = new HealBall
                             {
                                 DVX = ParseInt(fields, "dvx"),
                                 H = ParseInt(fields, "h"),
@@ -464,7 +464,7 @@ namespace Lf2datConverter
                         }
                         case 9:
                         {
-                            frameElement = new ReflectiveShield()
+                            frameElement = new ReflectiveShield
                             {
                                 DVX = ParseInt(fields, "dvx"),
                                 Fall = ParseInt(fields, "fall"),
@@ -479,7 +479,7 @@ namespace Lf2datConverter
                         }
                         case 10:
                         {
-                            frameElement = new SonataOfDeath()
+                            frameElement = new SonataOfDeath
                             {
                                 H = ParseInt(fields, "h"),
                                 Injury = ParseInt(fields, "injury"),
@@ -493,7 +493,7 @@ namespace Lf2datConverter
                         }
                         case 11:
                         {
-                            frameElement = new SonataOfDeath2()
+                            frameElement = new SonataOfDeath2
                             {
                                 H = ParseInt(fields, "h"),
                                 Injury = ParseInt(fields, "injury"),
@@ -507,7 +507,7 @@ namespace Lf2datConverter
                         }
                         case 14:
                         {
-                            frameElement = new SolidObject()
+                            frameElement = new SolidObject
                             {
                                 H = ParseInt(fields, "h"),
                                 VRest = ParseInt(fields, "vrest"),
@@ -519,7 +519,7 @@ namespace Lf2datConverter
                         }
                         case 15:
                         {
-                            frameElement = new WindWhirlWind()
+                            frameElement = new WindWhirlWind
                             {
                                 BDefend = ParseInt(fields, "bdefend"),
                                 DVX = ParseInt(fields, "dvx"),
@@ -537,7 +537,7 @@ namespace Lf2datConverter
                         }
                         case 16:
                         {
-                            frameElement = new FrostWhirlWind()
+                            frameElement = new FrostWhirlWind
                             {
                                 BDefend = ParseInt(fields, "bdefend"),
                                 DVX = ParseInt(fields, "dvx"),
