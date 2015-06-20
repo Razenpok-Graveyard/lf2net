@@ -1,10 +1,6 @@
 ﻿namespace Lf2datConverter.dat.Convenient
 {
-    class CatchBody: Interaction
+    class CatchBody: Catch
     {
-        public int CatchingActFront;
-        public int CatchingActBack;
-        public int CaughtActFront;
-        public int CaughtActBack;
     }
 }

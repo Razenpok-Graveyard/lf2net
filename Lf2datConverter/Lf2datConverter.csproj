@@ -78,7 +78,8 @@
     <Compile Include="dat\Convenient\FrameElements\CatchingPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\CaughtPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\FrameElement.cs" />
-    <Compile Include="dat\Convenient\FrameElements\I2DMovableElement.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interactions\Catch.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interfaces\I2DMovableElement.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\CatchBody.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\CatchDOP.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\Falling.cs" />
@@ -95,8 +96,8 @@
     <Compile Include="dat\Convenient\FrameElements\Interactions\WeaponStrength.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\WindWhirlWind.cs" />
     <Compile Include="dat\Convenient\FrameElements\ObjectPoint.cs" />
-    <Compile Include="dat\Convenient\FrameElements\PointFrameElement.cs" />
-    <Compile Include="dat\Convenient\FrameElements\IRectangularFrameElement.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interfaces\IPointFrameElement.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interfaces\IRectangularFrameElement.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\SonataOfDeath2.cs" />
     <Compile Include="dat\Convenient\FrameElements\WeaponPoint.cs" />
     <Compile Include="dat\Convenient\SpriteFile.cs" />
