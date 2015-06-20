@@ -5,9 +5,9 @@
         public int StartID;
         public int FinishID;
         public string Sprite;
-        public int W;
-        public int H;
-        public int Row;
-        public int Col;
+        public int Width;
+        public int Height;
+        public int Rows;
+        public int Columns;
     }
 }

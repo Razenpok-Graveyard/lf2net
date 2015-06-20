@@ -12,7 +12,7 @@ namespace Lf2datConverter
     {
         static void Main(string[] args)
         {
-            var fileName = "henry.dat";//Console.ReadLine();
+            var fileName = "davis.dat";//Console.ReadLine();
             if (fileName == null || !File.Exists(fileName)) return;
             // First 123 bytes of lf2 .dat files are useless
             var bytes = File.ReadAllBytes(fileName)
@@ -22,6 +22,9 @@ namespace Lf2datConverter
             File.WriteAllText(fileName.Split('.')[0] + ".txt", text);
             var json = JsonConvert.SerializeObject(ch, Formatting.Indented);
             File.WriteAllText(fileName.Split('.')[0] + ".json", json);
+            var cch = ConvenientConverter.ConvertToConvenientCharacter(ch);
+            json = JsonConvert.SerializeObject(cch, Formatting.Indented);
+            File.WriteAllText(fileName.Split('.')[0] + "_c.json", json);
         }
     }
 }

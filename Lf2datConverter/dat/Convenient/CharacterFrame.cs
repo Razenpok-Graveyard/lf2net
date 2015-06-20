@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Lf2datConverter.dat.Convenient
 {
@@ -10,11 +11,8 @@ namespace Lf2datConverter.dat.Convenient
         public int State;
         public int Wait;
         public int Next;
-        public int DVX;
-        public int DVY;
-        public int DVZ;
-        public int CenterX;
-        public int CenterY;
+        public Vector3 DV;
+        public Vector2 Center;
         public int HitA;
         public int HitD;
         public int HitJ;

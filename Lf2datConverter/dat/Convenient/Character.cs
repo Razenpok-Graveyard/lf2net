@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Lf2datConverter.dat.Convenient
 {
@@ -9,21 +10,15 @@ namespace Lf2datConverter.dat.Convenient
         public string Small;
         public List<SpriteFile> SpriteFiles = new List<SpriteFile>();
         public int WalkingFrameRate;
-        public float WalkingSpeed;
-        public float WalkingSpeedZ;
+        public Vector3 WalkingSpeed;
         public int RunningFrameRate;
-        public float RunningSpeed;
-        public float RunningSpeedZ;
-        public float HeavyWalkingSpeed;
-        public float HeavyWalkingSpeedZ;
-        public float HeavyRunningSpeed;
-        public float HeavyRunningSpeedZ;
+        public Vector3 RunningSpeed;
+        public Vector3 HeavyWalkingSpeed;
+        public Vector3 HeavyRunningSpeed;
         public float JumpHeight;
-        public float JumpDistance;
-        public float JumpDistanceZ;
+        public Vector3 JumpDistance;
         public float DashHeight;
-        public float DashDistance;
-        public float DashDistanceZ;
+        public Vector3 DashDistance;
         public float RowingHeight;
         public float RowingDistance; 
         public List<CharacterFrame> Frames = new List<CharacterFrame>(); 
