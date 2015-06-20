@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lf2datConverter.dat.Convenient
 {
-    interface IDamagingInteraction
+    interface IDamagingElement
     {
         int Injury { get; set; }
     }

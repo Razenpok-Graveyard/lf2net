@@ -2,9 +2,9 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class CatchingPoint : FrameElement, IPointFrameElement, IMovementProducingElement
+    class CatchingPoint : FrameElement, IPointFrameElement, IMovementProducingElement, IDamagingElement
+        ,ICoveringElement
     {
-        public int Injury;
         public int VAction;
         public int AAction;
         public int JAction;
@@ -13,8 +13,9 @@ namespace Lf2datConverter.dat.Convenient
         public int ThrowInjury;
         public int Decrease;
         public int DirControl;
-        public int Cover;
         public Point Position { get; set; }
         public Vector3 VelocityDelta { get; set; }
+        public int Injury { get; set; }
+        public int Cover { get; set; }
     }
 }

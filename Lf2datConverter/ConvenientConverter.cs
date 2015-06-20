@@ -94,10 +94,9 @@ namespace Lf2datConverter
                             Kind = weaponPoint.Kind,
                             Attacking = weaponPoint.Attacking,
                             Cover = weaponPoint.Cover,
-                            DVZ = weaponPoint.DVZ,
                             WeaponAct = weaponPoint.WeaponAct,
                             Position = new Point(weaponPoint.X, weaponPoint.Y),
-                            VelocityDelta = new Vector3(weaponPoint.DVX, weaponPoint.DVY, 0)
+                            VelocityDelta = new Vector3(weaponPoint.DVX, weaponPoint.DVY, weaponPoint.DVZ)
                         };
                     break;
                 }
@@ -191,7 +190,7 @@ namespace Lf2datConverter
                             ARest = normalHit.ARest,
                             BDefend = normalHit.BDefend,
                             Effect = normalHit.Effect,
-                            Fall = normalHit.Fall,
+                            FallPoints = normalHit.Fall,
                             Injury = normalHit.Injury,
                             VRest = normalHit.VRest,
                             ZWidth = normalHit.ZWidth,
@@ -254,7 +253,7 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(falling.X, falling.Y, falling.W, falling.H),
                             BDefend = falling.BDefend,
-                            Fall = falling.Fall,
+                            FallPoints = falling.Fall,
                             Injury = falling.Injury,
                             VRest = falling.VRest,
                             VelocityDelta = new Vector3(falling.DVX, 0, 0)
@@ -271,7 +270,7 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(weaponStrength.X, weaponStrength.Y, weaponStrength.W, weaponStrength.H),
                             BDefend = weaponStrength.BDefend,
-                            Fall = weaponStrength.Fall,
+                            FallPoints = weaponStrength.Fall,
                             Injury = weaponStrength.Injury,
                             VelocityDelta = new Vector3(weaponStrength.DVX, 0, 0)
                         };
@@ -326,7 +325,7 @@ namespace Lf2datConverter
                         convFrameElement = new ReflectiveShield
                         {
                             Area = new Rectangle(reflectiveShield.X, reflectiveShield.Y, reflectiveShield.W, reflectiveShield.H),
-                            Fall = reflectiveShield.Fall,
+                            FallPoints = reflectiveShield.Fall,
                             Injury = reflectiveShield.Injury,
                             VRest = reflectiveShield.VRest,
                             VelocityDelta = new Vector3(reflectiveShield.DVX, 0, 0)
@@ -386,7 +385,7 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(windWhirlWind.X, windWhirlWind.Y, windWhirlWind.W, windWhirlWind.H),
                             BDefend = windWhirlWind.BDefend,
-                            Fall = windWhirlWind.Fall,
+                            FallPoints = windWhirlWind.Fall,
                             Injury = windWhirlWind.Injury,
                             VRest = windWhirlWind.VRest,
                             ZWidth = windWhirlWind.ZWidth,
@@ -404,7 +403,7 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(frostWhirlWind.X, frostWhirlWind.Y, frostWhirlWind.W, frostWhirlWind.H),
                             BDefend = frostWhirlWind.BDefend,
-                            Fall = frostWhirlWind.Fall,
+                            FallPoints = frostWhirlWind.Fall,
                             Injury = frostWhirlWind.Injury,
                             VRest = frostWhirlWind.VRest,
                             ZWidth = frostWhirlWind.ZWidth,

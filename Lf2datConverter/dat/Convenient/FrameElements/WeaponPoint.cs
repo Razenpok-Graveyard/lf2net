@@ -2,14 +2,13 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class WeaponPoint: FrameElement, IPointFrameElement, IMovementProducingElement
+    class WeaponPoint: FrameElement, IPointFrameElement, IMovementProducingElement, ICoveringElement
     {
         public int Kind;
         public int WeaponAct;
         public int Attacking;
-        public int Cover;
-        public int DVZ;
         public Point Position { get; set; }
         public Vector3 VelocityDelta { get; set; }
+        public int Cover { get; set; }
     }
 }

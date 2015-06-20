@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class HealBall: Interaction, IDamagingInteraction, IMovementProducingElement
+    class HealBall: Interaction, IDamagingElement, IMovementProducingElement
     {
         public int Injury { get; set; }
         public Vector3 VelocityDelta { get; set; }
