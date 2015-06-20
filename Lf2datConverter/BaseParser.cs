@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Lf2datConverter.dat.Base;
 
 namespace Lf2datConverter
 {

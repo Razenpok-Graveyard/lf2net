@@ -12,7 +12,7 @@ namespace Lf2datConverter
     {
         static void Main(string[] args)
         {
-            var fileName = "davis.dat";//Console.ReadLine();
+            var fileName = "henry.dat";//Console.ReadLine();
             if (fileName == null || !File.Exists(fileName)) return;
             // First 123 bytes of lf2 .dat files are useless
             var bytes = File.ReadAllBytes(fileName)
