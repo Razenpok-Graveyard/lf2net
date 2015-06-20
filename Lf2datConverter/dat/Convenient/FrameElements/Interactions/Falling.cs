@@ -2,8 +2,6 @@
 {
     class Falling: Interaction
     {
-        public int W;
-        public int H;
         public int DVX;
         public int VRest;
         public int Fall;

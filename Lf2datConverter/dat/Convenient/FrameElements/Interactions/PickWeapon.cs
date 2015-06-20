@@ -1,9 +1,9 @@
-﻿namespace Lf2datConverter.dat.Convenient
+﻿using Microsoft.Xna.Framework;
+
+namespace Lf2datConverter.dat.Convenient
 {
     class PickWeapon: Interaction
     {
-        public int W;
-        public int H;
         public int VRest;
     }
 }

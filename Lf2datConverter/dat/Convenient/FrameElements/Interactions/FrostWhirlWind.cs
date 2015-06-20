@@ -2,8 +2,6 @@
 {
     class FrostWhirlWind: Interaction
     {
-        public int W;
-        public int H;
         public int DVX;
         public int DVY;
         public int VRest;

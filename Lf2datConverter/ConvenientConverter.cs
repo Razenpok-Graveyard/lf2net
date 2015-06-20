@@ -98,8 +98,7 @@ namespace Lf2datConverter
                             DVY = weaponPoint.DVY,
                             DVZ = weaponPoint.DVZ,
                             WeaponAct = weaponPoint.WeaponAct,
-                            X = weaponPoint.X,
-                            Y = weaponPoint.Y
+                            Position = new Point(weaponPoint.X, weaponPoint.Y)
                         };
                     break;
                 }
@@ -116,8 +115,7 @@ namespace Lf2datConverter
                             Facing = objectPoint.Facing,
                             Kind = objectPoint.Kind,
                             OID = objectPoint.OID,
-                            X = objectPoint.X,
-                            Y = objectPoint.Y
+                            Position = new Point(objectPoint.X, objectPoint.Y)
                         };
                     }
                     break;
@@ -142,8 +140,7 @@ namespace Lf2datConverter
                             ThrowVY = catchingPoint.ThrowVY,
                             ThrowVZ = catchingPoint.ThrowVZ,
                             VAction = catchingPoint.VAction,
-                            X = catchingPoint.X,
-                            Y = catchingPoint.Y
+                            Position = new Point(catchingPoint.X, catchingPoint.Y)
                         };
                     }
                     break;
@@ -157,8 +154,7 @@ namespace Lf2datConverter
                         {
                             BackHurtAct = caughtPoint.BackHurtAct,
                             FrontHurtAct = caughtPoint.FrontHurtAct,
-                            X = caughtPoint.X,
-                            Y = caughtPoint.Y
+                            Position = new Point(caughtPoint.X, caughtPoint.Y)
                         };
                     }
                     break;
@@ -170,8 +166,7 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new BloodPoint
                         {
-                            X = bloodPoint.X,
-                            Y = bloodPoint.Y
+                            Position = new Point(bloodPoint.X, bloodPoint.Y)
                         };
                     }
                     break;
@@ -183,11 +178,8 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new Body
                         {
-                            H = body.H,
-                            Kind = body.Kind,
-                            W = body.W,
-                            X = body.X,
-                            Y = body.Y
+                            Area = new Rectangle(body.X, body.Y, body.W, body.H),
+                            Kind = body.Kind
                         };
                     }
                     break;
@@ -199,19 +191,16 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new NormalHit
                         {
+                            Area = new Rectangle(normalHit.X, normalHit.Y, normalHit.W, normalHit.H),
                             ARest = normalHit.ARest,
                             BDefend = normalHit.BDefend,
                             DVX = normalHit.DVX,
                             DVY = normalHit.DVY,
                             Effect = normalHit.Effect,
                             Fall = normalHit.Fall,
-                            H = normalHit.H,
                             Injury = normalHit.Injury,
                             VRest = normalHit.VRest,
-                            ZWidth = normalHit.ZWidth,
-                            X = normalHit.X,
-                            Y = normalHit.Y,
-                            W = normalHit.W
+                            ZWidth = normalHit.ZWidth
                         };
                     }
                     break;
@@ -223,14 +212,11 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new CatchDoP
                         {
+                            Area = new Rectangle(catchDoP.X, catchDoP.Y, catchDoP.W, catchDoP.H),
                             CatchingActBack = catchDoP.CatchingActBack,
                             CatchingActFront = catchDoP.CatchingActFront,
                             CaughtActBack = catchDoP.CaughtActBack,
-                            CaughtActFront = catchDoP.CaughtActFront,
-                            H = catchDoP.H,
-                            W = catchDoP.W,
-                            X = catchDoP.X,
-                            Y = catchDoP.Y
+                            CaughtActFront = catchDoP.CaughtActFront
                         };
                     }
                     break;
@@ -242,11 +228,8 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new PickWeapon
                         {
-                            H = pickWeapon.H,
-                            VRest = pickWeapon.VRest,
-                            W = pickWeapon.W,
-                            X = pickWeapon.X,
-                            Y = pickWeapon.Y,
+                            Area = new Rectangle(pickWeapon.X, pickWeapon.Y, pickWeapon.W, pickWeapon.H),
+                            VRest = pickWeapon.VRest
                         };
                     }
                     break;
@@ -258,14 +241,11 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new CatchBody
                         {
+                            Area = new Rectangle(catchBody.X, catchBody.Y, catchBody.W, catchBody.H),
                             CatchingActBack = catchBody.CatchingActBack,
                             CatchingActFront = catchBody.CatchingActFront,
                             CaughtActBack = catchBody.CaughtActBack,
-                            CaughtActFront = catchBody.CaughtActFront,
-                            H = catchBody.H,
-                            W = catchBody.W,
-                            X = catchBody.X,
-                            Y = catchBody.Y
+                            CaughtActFront = catchBody.CaughtActFront
                         };
                     }
                     break;
@@ -277,15 +257,12 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new Falling
                         {
+                            Area = new Rectangle(falling.X, falling.Y, falling.W, falling.H),
                             BDefend = falling.BDefend,
                             DVX = falling.DVX,
                             Fall = falling.Fall,
-                            H = falling.H,
                             Injury = falling.Injury,
-                            VRest = falling.VRest,
-                            X = falling.X,
-                            Y = falling.Y,
-                            W = falling.W
+                            VRest = falling.VRest
                         };
                     }
                     break;
@@ -297,14 +274,11 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new WeaponStrength
                         {
+                            Area = new Rectangle(weaponStrength.X, weaponStrength.Y, weaponStrength.W, weaponStrength.H),
                             BDefend = weaponStrength.BDefend,
                             DVX = weaponStrength.DVX,
                             Fall = weaponStrength.Fall,
-                            H = weaponStrength.H,
-                            Injury = weaponStrength.Injury,
-                            X = weaponStrength.X,
-                            Y = weaponStrength.Y,
-                            W = weaponStrength.W
+                            Injury = weaponStrength.Injury
                         };
                     }
                     break;
@@ -316,11 +290,8 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new SuperPunch
                         {
-                            H = superPunch.H,
-                            VRest = superPunch.VRest,
-                            X = superPunch.X,
-                            Y = superPunch.Y,
-                            W = superPunch.W
+                            Area = new Rectangle(superPunch.X, superPunch.Y, superPunch.W, superPunch.H),
+                            VRest = superPunch.VRest
                         };
                     }
                     break;
@@ -332,11 +303,8 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new PickWeapon2
                         {
-                            H = pickWeapon2.H,
-                            VRest = pickWeapon2.VRest,
-                            X = pickWeapon2.X,
-                            Y = pickWeapon2.Y,
-                            W = pickWeapon2.W
+                            Area = new Rectangle(pickWeapon2.X, pickWeapon2.Y, pickWeapon2.W, pickWeapon2.H),
+                            VRest = pickWeapon2.VRest
                         };
                     }
                     break;
@@ -348,12 +316,9 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new HealBall
                         {
+                            Area = new Rectangle(healBall.X, healBall.Y, healBall.W, healBall.H),
                             DVX = healBall.DVX,
-                            H = healBall.H,
-                            Injury = healBall.Injury,
-                            X = healBall.X,
-                            Y = healBall.Y,
-                            W = healBall.W
+                            Injury = healBall.Injury
                         };
                     }
                     break;
@@ -365,14 +330,11 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new ReflectiveShield
                         {
+                            Area = new Rectangle(reflectiveShield.X, reflectiveShield.Y, reflectiveShield.W, reflectiveShield.H),
                             DVX = reflectiveShield.DVX,
                             Fall = reflectiveShield.Fall,
-                            H = reflectiveShield.H,
                             Injury = reflectiveShield.Injury,
-                            VRest = reflectiveShield.VRest,
-                            X = reflectiveShield.X,
-                            Y = reflectiveShield.Y,
-                            W = reflectiveShield.W
+                            VRest = reflectiveShield.VRest
                         };
                     }
                     break;
@@ -384,13 +346,10 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new SonataOfDeath
                         {
-                            H = sonataOfDeath.H,
+                            Area = new Rectangle(sonataOfDeath.X, sonataOfDeath.Y, sonataOfDeath.W, sonataOfDeath.H),
                             Injury = sonataOfDeath.Injury,
                             VRest = sonataOfDeath.VRest,
-                            ZWidth = sonataOfDeath.ZWidth,
-                            X = sonataOfDeath.X,
-                            Y = sonataOfDeath.Y,
-                            W = sonataOfDeath.W
+                            ZWidth = sonataOfDeath.ZWidth
                         };
                     }
                     break;
@@ -402,13 +361,10 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new SonataOfDeath2
                         {
-                            H = sonataOfDeath2.H,
+                            Area = new Rectangle(sonataOfDeath2.X, sonataOfDeath2.Y, sonataOfDeath2.W, sonataOfDeath2.H),
                             Injury = sonataOfDeath2.Injury,
                             VRest = sonataOfDeath2.VRest,
-                            ZWidth = sonataOfDeath2.ZWidth,
-                            X = sonataOfDeath2.X,
-                            Y = sonataOfDeath2.Y,
-                            W = sonataOfDeath2.W
+                            ZWidth = sonataOfDeath2.ZWidth
                         };
                     }
                     break;
@@ -420,11 +376,8 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new SolidObject
                         {
-                            H = solidObject.H,
-                            VRest = solidObject.VRest,
-                            X = solidObject.X,
-                            Y = solidObject.Y,
-                            W = solidObject.W
+                            Area = new Rectangle(solidObject.X, solidObject.Y, solidObject.W, solidObject.H),
+                            VRest = solidObject.VRest
                         };
                     }
                     break;
@@ -436,17 +389,14 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new WindWhirlWind
                         {
+                            Area = new Rectangle(windWhirlWind.X, windWhirlWind.Y, windWhirlWind.W, windWhirlWind.H),
                             BDefend = windWhirlWind.BDefend,
                             DVX = windWhirlWind.DVX,
                             DVY = windWhirlWind.DVY,
                             Fall = windWhirlWind.Fall,
-                            H = windWhirlWind.H,
                             Injury = windWhirlWind.Injury,
                             VRest = windWhirlWind.VRest,
-                            ZWidth = windWhirlWind.ZWidth,
-                            X = windWhirlWind.X,
-                            Y = windWhirlWind.Y,
-                            W = windWhirlWind.W
+                            ZWidth = windWhirlWind.ZWidth
                         };
                     }
                     break;
@@ -458,17 +408,14 @@ namespace Lf2datConverter
                     {
                         convFrameElement = new FrostWhirlWind
                         {
+                            Area = new Rectangle(frostWhirlWind.X, frostWhirlWind.Y, frostWhirlWind.W, frostWhirlWind.H),
                             BDefend = frostWhirlWind.BDefend,
                             DVX = frostWhirlWind.DVX,
                             DVY = frostWhirlWind.DVY,
                             Fall = frostWhirlWind.Fall,
-                            H = frostWhirlWind.H,
                             Injury = frostWhirlWind.Injury,
                             VRest = frostWhirlWind.VRest,
-                            ZWidth = frostWhirlWind.ZWidth,
-                            X = frostWhirlWind.X,
-                            Y = frostWhirlWind.Y,
-                            W = frostWhirlWind.W
+                            ZWidth = frostWhirlWind.ZWidth
                         };
                     }
                     break;

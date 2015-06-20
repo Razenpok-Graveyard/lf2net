@@ -2,8 +2,6 @@
 {
     class CatchBody: Interaction
     {
-        public int W;
-        public int H;
         public int CatchingActFront;
         public int CatchingActBack;
         public int CaughtActFront;

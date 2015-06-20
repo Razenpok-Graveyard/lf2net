@@ -59,7 +59,7 @@
     <Compile Include="dat\Base\FrameElements\Interactions\SuperPunch.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\WeaponStrength.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\WindWhirlWind.cs" />
-    <Compile Include="dat\Base\FrameElements\SonataOfDeath2.cs" />
+    <Compile Include="dat\Base\FrameElements\Interactions\SonataOfDeath2.cs" />
     <Compile Include="BaseParser.cs" />
     <Compile Include="dat\Base\Character.cs" />
     <Compile Include="dat\Base\CharacterFrame.cs" />
@@ -76,7 +76,6 @@
     <Compile Include="dat\Convenient\FrameElements\BloodPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\Body.cs" />
     <Compile Include="dat\Convenient\FrameElements\CatchingPoint.cs" />
-    <Compile Include="dat\Convenient\FrameElements\CatchPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\CaughtPoint.cs" />
     <Compile Include="dat\Convenient\FrameElements\FrameElement.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\CatchBody.cs" />
@@ -95,7 +94,9 @@
     <Compile Include="dat\Convenient\FrameElements\Interactions\WeaponStrength.cs" />
     <Compile Include="dat\Convenient\FrameElements\Interactions\WindWhirlWind.cs" />
     <Compile Include="dat\Convenient\FrameElements\ObjectPoint.cs" />
-    <Compile Include="dat\Convenient\FrameElements\SonataOfDeath2.cs" />
+    <Compile Include="dat\Convenient\FrameElements\PointFrameElement.cs" />
+    <Compile Include="dat\Convenient\FrameElements\RectangularFrameElement.cs" />
+    <Compile Include="dat\Convenient\FrameElements\Interactions\SonataOfDeath2.cs" />
     <Compile Include="dat\Convenient\FrameElements\WeaponPoint.cs" />
     <Compile Include="dat\Convenient\SpriteFile.cs" />
     <Compile Include="Decryptor.cs" />

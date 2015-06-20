@@ -1,9 +1,10 @@
-﻿namespace Lf2datConverter.dat.Convenient
+﻿using Microsoft.Xna.Framework;
+
+namespace Lf2datConverter.dat.Convenient
 {
-    class Body: FrameElement
+    class Body: FrameElement, IRectangularFrameElement
     {
         public int Kind;
-        public int W;
-        public int H;
+        public Rectangle Area { get; set; }
     }
 }

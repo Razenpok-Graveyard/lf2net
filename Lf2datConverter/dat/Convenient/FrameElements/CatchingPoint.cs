@@ -1,6 +1,8 @@
-﻿namespace Lf2datConverter.dat.Convenient
+﻿using Microsoft.Xna.Framework;
+
+namespace Lf2datConverter.dat.Convenient
 {
-    class CatchingPoint: CatchPoint
+    class CatchingPoint : FrameElement, IPointFrameElement
     {
         public int Injury;
         public int VAction;
@@ -15,5 +17,6 @@
         public int Decrease;
         public int DirControl;
         public int Cover;
+        public Point Position { get; set; }
     }
 }

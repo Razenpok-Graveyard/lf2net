@@ -2,8 +2,6 @@
 {
     class HealBall: Interaction
     {
-        public int W;
-        public int H;
         public int DVX;
         public int Injury;
     }

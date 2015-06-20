@@ -1,9 +1,9 @@
-﻿namespace Lf2datConverter.dat.Convenient
+﻿using Microsoft.Xna.Framework;
+
+namespace Lf2datConverter.dat.Convenient
 {
     class NormalHit: Interaction
     {
-        public int W;
-        public int H;
         public int DVX;
         public int DVY;
         public int ARest;
