@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Lf2net
 {
-    class Animation
+    class BasicAnimation
     {
-        private SpriteAtlas atlas;
+        private BasicSpriteAtlas atlas;
         private IEnumerator<int> frames;
 
         private int delay = 7;
@@ -23,7 +23,7 @@ namespace Lf2net
             }
         }
 
-        public Animation(SpriteAtlas atlas, IEnumerable<int> frames)
+        public BasicAnimation(BasicSpriteAtlas atlas, IEnumerable<int> frames)
         {
             this.atlas = atlas;
             this.frames = frames.GetEnumerator();

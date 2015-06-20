@@ -36,6 +36,19 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter.cs" />
+    <Compile Include="dat\Character.cs" />
+    <Compile Include="dat\CharacterFrame.cs" />
+    <Compile Include="dat\FrameElements\BloodPoint.cs" />
+    <Compile Include="dat\FrameElements\Body.cs" />
+    <Compile Include="dat\FrameElements\CatchingPoint.cs" />
+    <Compile Include="dat\FrameElements\CatchPoint.cs" />
+    <Compile Include="dat\FrameElements\CaughtPoint.cs" />
+    <Compile Include="dat\FrameElements\IFrameElement.cs" />
+    <Compile Include="dat\FrameElements\ObjectPoint.cs" />
+    <Compile Include="dat\FrameElements\WeaponPoint.cs" />
+    <Compile Include="dat\SpriteFile.cs" />
+    <Compile Include="Decryptor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

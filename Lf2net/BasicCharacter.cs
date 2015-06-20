@@ -8,19 +8,19 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Lf2net
 {
-    class Character
+    class BasicCharacter
     {
-        private Animation idle;
-        private Animation walk;
-        private Animation run;
+        private BasicAnimation idle;
+        private BasicAnimation walk;
+        private BasicAnimation run;
         public Vector2 Position = Vector2.Zero;
-        private Animation state;
+        private BasicAnimation state;
         private BattleField battlefield;
         private bool faceRight = true;
         private Vector2 walkSpeed = new Vector2(5, 2.5f);
         private Vector2 runSpeed = new Vector2(10, 1.6f);
 
-        public Character(BattleField battlefield, Animation idle, Animation walk, Animation run)
+        public BasicCharacter(BattleField battlefield, BasicAnimation idle, BasicAnimation walk, BasicAnimation run)
         {
             this.battlefield = battlefield;
             this.idle = idle;

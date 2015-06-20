@@ -51,11 +51,11 @@ namespace Lf2net
             var testBfFloor = Content.Load<Texture2D>("bg/cuhk/floor3");
             testBF = new BattleField(testBfFloor);
             var textureDavis = Content.Load<Texture2D>("Characters/Davis/davis_0");
-            var davisAtlas = new SpriteAtlas(textureDavis, 7, 10);
-            var davisIdle = new Animation(davisAtlas, new[] { 0, 1, 2, 3 });
-            var davisWalk = new Animation(davisAtlas, new[] { 4, 5, 6, 7, 6, 5 });
-            var davisRun = new Animation(davisAtlas, new[] { 20, 21, 22, 21 });
-            var davis = new Character(testBF, davisIdle, davisWalk, davisRun);
+            var davisAtlas = new BasicSpriteAtlas(textureDavis, 7, 10);
+            var davisIdle = new BasicAnimation(davisAtlas, new[] { 0, 1, 2, 3 });
+            var davisWalk = new BasicAnimation(davisAtlas, new[] { 4, 5, 6, 7, 6, 5 });
+            var davisRun = new BasicAnimation(davisAtlas, new[] { 20, 21, 22, 21 });
+            var davis = new BasicCharacter(testBF, davisIdle, davisWalk, davisRun);
             testBF.AddCharacter(davis);
         }
 

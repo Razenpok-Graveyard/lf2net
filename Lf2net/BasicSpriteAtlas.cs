@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Lf2net
 {
-    class SpriteAtlas
+    class BasicSpriteAtlas
     {
         public Texture2D Texture { get; set; }
         public int Rows { get; set; }
@@ -23,7 +23,7 @@ namespace Lf2net
             get { return index < totalFrames ? frames[index] : null; }
         }
 
-        public SpriteAtlas(Texture2D texture, int rows, int columns)
+        public BasicSpriteAtlas(Texture2D texture, int rows, int columns)
         {
             Texture = texture;
             Rows = rows;

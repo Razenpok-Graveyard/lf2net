@@ -9,7 +9,7 @@ namespace Lf2net
 {
 	class BattleField
 	{
-		private List<Character> characters = new List<Character>();
+		private List<BasicCharacter> characters = new List<BasicCharacter>();
 		private Texture2D floor;
 
 		public int Width
@@ -27,10 +27,10 @@ namespace Lf2net
 			this.floor = floor;
 		}
 
-		public void AddCharacter(Character character)
+		public void AddCharacter(BasicCharacter basicCharacter)
 		{
-			characters.Add(character);
-			character.Position = new Vector2(100, 100);
+			characters.Add(basicCharacter);
+			basicCharacter.Position = new Vector2(100, 100);
 		}
 
 		public void Update()
