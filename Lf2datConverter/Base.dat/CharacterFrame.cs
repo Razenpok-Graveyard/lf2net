@@ -4,9 +4,9 @@ namespace Lf2datConverter
 {
     class CharacterFrame
     {
-        public int Number;
+        public int FrameNumber;
         public string Name;
-        public int Picture;
+        public int Pic;
         public int State;
         public int Wait;
         public int Next;
@@ -27,6 +27,6 @@ namespace Lf2datConverter
         public int HitJA;
         public int MP;
         public string Sound;
-        public List<IFrameElement> FrameElements = new List<IFrameElement>();
+        public List<FrameElement> FrameElements = new List<FrameElement>();
     }
 }

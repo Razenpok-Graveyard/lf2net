@@ -1,6 +1,6 @@
 ﻿namespace Lf2datConverter
 {
-    class WeaponPoint: IFrameElement
+    class WeaponPoint: FrameElement
     {
         public int Kind;
         public int X;

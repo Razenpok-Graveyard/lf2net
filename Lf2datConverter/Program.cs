@@ -18,7 +18,7 @@ namespace Lf2datConverter
             var bytes = File.ReadAllBytes(fileName)
                 .Skip(123);
             var text = Decryptor.DecryptByteSequence(bytes);
-            var ch = Converter.ConvertDat(text);
+            var ch = BaseParser.ParseDat(text);
             File.WriteAllText(fileName.Split('.')[0] + ".txt", text);
             var json = JsonConvert.SerializeObject(ch, Formatting.Indented);
             File.WriteAllText(fileName.Split('.')[0] + ".json", json);

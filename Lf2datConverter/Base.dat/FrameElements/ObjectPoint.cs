@@ -1,6 +1,6 @@
 ﻿namespace Lf2datConverter
 {
-    class ObjectPoint: IFrameElement
+    class ObjectPoint: FrameElement
     {
         public int Kind;
         public int X;
@@ -8,7 +8,7 @@
         public int Action;
         public int DVX;
         public int DVY;
-        public int ObjectID;
+        public int OID;
         public int Facing;
     }
 }

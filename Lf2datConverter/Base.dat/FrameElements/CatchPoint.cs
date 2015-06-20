@@ -1,6 +1,7 @@
 ﻿namespace Lf2datConverter
 {
-    interface IFrameElement
+    class CatchPoint: FrameElement
     {
+
     }
 }

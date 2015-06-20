@@ -25,7 +25,7 @@ namespace Lf2datConverter
         public float DashDistance;
         public float DashDistanceZ;
         public float RowingHeight;
-        public float RowingDistance;
+        public float RowingDistance; 
         public List<CharacterFrame> Frames = new List<CharacterFrame>(); 
     }
 }
