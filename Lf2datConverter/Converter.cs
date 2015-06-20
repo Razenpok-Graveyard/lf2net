@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -31,7 +32,7 @@ namespace Lf2datConverter
 
         private static List<Block> GetBlocks(IEnumerable<string> lines)
         {
-            var result = new List<Block>();
+            var blocks = new List<Block>();
             var currentBlock = new Block();
             var currentFrameElement = "";
             var currentFrameElementContents = "";
@@ -52,7 +53,7 @@ namespace Lf2datConverter
                 }
                 if (line.Contains("<bmp_end>") || line.Contains("<frame_end>"))
                 {
-                    result.Add(currentBlock);
+                    blocks.Add(currentBlock);
                     currentBlock = new Block();
                     continue;
                 }
@@ -85,7 +86,7 @@ namespace Lf2datConverter
                     {
                         currentBlock.Fields["SpriteFiles"] = "";
                     }
-                    currentBlock.Fields["SpriteFiles"] += line + " ";
+                    currentBlock.Fields["SpriteFiles"] += line + " | ";
                     continue;
                 }
                 if (currentFrameElement != "")
@@ -100,7 +101,7 @@ namespace Lf2datConverter
                     }
                 }
             }
-            return result;
+            return blocks;
         }
 
         private static Character ParseCharacter(List<Block> blocks)
@@ -115,92 +116,61 @@ namespace Lf2datConverter
 
         private static Character ParseBmp(Block block)
         {
-            var result = new Character();
+            var character = new Character();
             if (block.Name != "bmp")
                 return null;
-            /*var splittedBlock = block.Fields
-                .Select(line => line.Split(new []{" ", ":"}, StringSplitOptions.RemoveEmptyEntries));
-            foreach (var parts in splittedBlock)
+            var fields = block.Fields;
+            character.Name = fields["name"];
+            character.Head = fields["head"];
+            character.Small = fields["small"];
+            var files = fields["SpriteFiles"].Split('|')
+                .Select(file => file.Split(new[] {" ", ":"}, StringSplitOptions.RemoveEmptyEntries));
+            foreach (var file in files.Where(file => file.Length > 0))
             {
-                // dirty hack to parse file statements
-                if (parts[0].Contains("file"))
-                {
-                    result.SpriteFiles.Add(ParseSpriteFile(parts));
-                    continue;
-                }
-                var fieldData = parts[1];*/
-                /*switch (parts[0])
-                {
-                    case "name":
-                    {
-                        result.Name = fieldData;
-                        break;
-                    }
-                        case "head":
-                    {
-                        result.Head = fieldData;
-                        break;
-                    }
-                        case "small":
-                    {
-                        result.Small = fieldData;
-                        break;
-                    }
-                        case "walking_frame_rate":
-                    {
-                        result.WalkingFrameRate = int.Parse(fieldData);
-                        break;
-                    }
-                        case "walking_speed":
-                    {
-                        result.Name = fieldData;
-                        break;
-                    }
-                        case "name":
-                    {
-                        result.Name = fieldData;
-                        break;
-                    }
-                        case "running_frame_rate":
-                    {
-                        result.RunningFrameRate = int.Parse(fieldData);
-                        break;
-                    }
-
-                }*/
-            //}
-            return result;
+                character.SpriteFiles.Add(ParseSpriteFile(file));
+            }
+            character.WalkingFrameRate = ParseInt(fields["walking_frame_rate"]);
+            character.WalkingSpeed = ParseFloat(fields["walking_speed"]);
+            character.WalkingSpeedZ = ParseFloat(fields["walking_speedz"]);
+            character.RunningFrameRate = ParseInt(fields["running_frame_rate"]);
+            character.RunningSpeed = ParseFloat(fields["running_speed"]);
+            character.RunningSpeedZ = ParseFloat(fields["running_speedz"]);
+            character.HeavyWalkingSpeed = ParseFloat(fields["heavy_walking_speed"]);
+            character.HeavyWalkingSpeedZ = ParseFloat(fields["heavy_walking_speedz"]);
+            character.HeavyRunningSpeed = ParseFloat(fields["heavy_running_speed"]);
+            character.HeavyRunningSpeedZ = ParseFloat(fields["heavy_running_speedz"]);
+            character.JumpHeight = ParseFloat(fields["jump_height"]);
+            character.JumpDistance = ParseFloat(fields["jump_distance"]);
+            character.JumpDistanceZ = ParseFloat(fields["jump_distancez"]);
+            character.DashHeight = ParseFloat(fields["dash_height"]);
+            character.DashDistance = ParseFloat(fields["dash_distance"]);
+            character.DashDistanceZ = ParseFloat(fields["dash_distancez"]);
+            character.RowingHeight = ParseFloat(fields["rowing_height"]);
+            character.RowingDistance = ParseFloat(fields["rowing_distance"]);
+            return character;
         }
-        /*
-walking_speed 5.000000
-walking_speedz 2.500000
-running_frame_rate 3
-running_speed 10.000000
-running_speedz 1.600000
-heavy_walking_speed 3.700000
-heavy_walking_speedz 1.850000
-heavy_running_speed 6.200000
-heavy_running_speedz 1.000000
-jump_height -16.299999
-jump_distance 10.000000
-jump_distancez 3.750000
-dash_height -10.000000
-dash_distance 18.000000
-dash_distancez 5.000000
-rowing_height -2.000000
-rowing_distance 5.000000*/
+
+        private static float ParseFloat(string s)
+        {
+            return float.Parse(s, CultureInfo.InvariantCulture);
+        }
+
+        private static int ParseInt(string s)
+        {
+            return int.Parse(s);
+        }
 
         private static SpriteFile ParseSpriteFile(IReadOnlyList<string> parts)
         {
             var file = new SpriteFile();
             var id = parts[0].Substring(4).Trim('(', ')').Split('-');
-            file.StartID = int.Parse(id[0]);
-            file.FinishID = int.Parse(id[1]);
+            file.StartID = ParseInt(id[0]);
+            file.FinishID = ParseInt(id[1]);
             file.Path = parts[1];
-            file.Width = int.Parse(parts[3]);
-            file.Height = int.Parse(parts[5]);
-            file.Rows = int.Parse(parts[7]);
-            file.Columns = int.Parse(parts[9]);
+            file.Width = ParseInt(parts[3]);
+            file.Height = ParseInt(parts[5]);
+            file.Rows = ParseInt(parts[7]);
+            file.Columns = ParseInt(parts[9]);
             return file;
         }
 
