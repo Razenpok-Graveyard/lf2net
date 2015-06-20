@@ -94,11 +94,10 @@ namespace Lf2datConverter
                             Kind = weaponPoint.Kind,
                             Attacking = weaponPoint.Attacking,
                             Cover = weaponPoint.Cover,
-                            DVX = weaponPoint.DVX,
-                            DVY = weaponPoint.DVY,
                             DVZ = weaponPoint.DVZ,
                             WeaponAct = weaponPoint.WeaponAct,
-                            Position = new Point(weaponPoint.X, weaponPoint.Y)
+                            Position = new Point(weaponPoint.X, weaponPoint.Y),
+                            VelocityDelta = new Point(weaponPoint.DVX, weaponPoint.DVY)
                         };
                     break;
                 }
@@ -136,11 +135,10 @@ namespace Lf2datConverter
                             JAction = catchingPoint.JAction,
                             TAction = catchingPoint.TAction,
                             ThrowInjury = catchingPoint.ThrowInjury,
-                            ThrowVX = catchingPoint.ThrowVX,
-                            ThrowVY = catchingPoint.ThrowVY,
                             ThrowVZ = catchingPoint.ThrowVZ,
                             VAction = catchingPoint.VAction,
-                            Position = new Point(catchingPoint.X, catchingPoint.Y)
+                            Position = new Point(catchingPoint.X, catchingPoint.Y),
+                            VelocityDelta = new Point(catchingPoint.ThrowVX, catchingPoint.ThrowVY)
                         };
                     }
                     break;
@@ -194,13 +192,12 @@ namespace Lf2datConverter
                             Area = new Rectangle(normalHit.X, normalHit.Y, normalHit.W, normalHit.H),
                             ARest = normalHit.ARest,
                             BDefend = normalHit.BDefend,
-                            DVX = normalHit.DVX,
-                            DVY = normalHit.DVY,
                             Effect = normalHit.Effect,
                             Fall = normalHit.Fall,
                             Injury = normalHit.Injury,
                             VRest = normalHit.VRest,
-                            ZWidth = normalHit.ZWidth
+                            ZWidth = normalHit.ZWidth,
+                            VelocityDelta = new Point(normalHit.DVX, normalHit.DVY)
                         };
                     }
                     break;
@@ -391,12 +388,11 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(windWhirlWind.X, windWhirlWind.Y, windWhirlWind.W, windWhirlWind.H),
                             BDefend = windWhirlWind.BDefend,
-                            DVX = windWhirlWind.DVX,
-                            DVY = windWhirlWind.DVY,
                             Fall = windWhirlWind.Fall,
                             Injury = windWhirlWind.Injury,
                             VRest = windWhirlWind.VRest,
-                            ZWidth = windWhirlWind.ZWidth
+                            ZWidth = windWhirlWind.ZWidth,
+                            VelocityDelta = new Point(windWhirlWind.DVX, windWhirlWind.DVY)
                         };
                     }
                     break;
@@ -410,12 +406,11 @@ namespace Lf2datConverter
                         {
                             Area = new Rectangle(frostWhirlWind.X, frostWhirlWind.Y, frostWhirlWind.W, frostWhirlWind.H),
                             BDefend = frostWhirlWind.BDefend,
-                            DVX = frostWhirlWind.DVX,
-                            DVY = frostWhirlWind.DVY,
                             Fall = frostWhirlWind.Fall,
                             Injury = frostWhirlWind.Injury,
                             VRest = frostWhirlWind.VRest,
-                            ZWidth = frostWhirlWind.ZWidth
+                            ZWidth = frostWhirlWind.ZWidth,
+                            VelocityDelta = new Point(frostWhirlWind.DVX, frostWhirlWind.DVY)
                         };
                     }
                     break;

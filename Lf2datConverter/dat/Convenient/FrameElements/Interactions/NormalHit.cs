@@ -2,10 +2,8 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class NormalHit: Interaction
+    class NormalHit: Interaction, I2DMovableElement
     {
-        public int DVX;
-        public int DVY;
         public int ARest;
         public int VRest;
         public int Fall;
@@ -13,5 +11,6 @@ namespace Lf2datConverter.dat.Convenient
         public int Injury;
         public int ZWidth;
         public int Effect;
+        public Point VelocityDelta { get; set; }
     }
 }
