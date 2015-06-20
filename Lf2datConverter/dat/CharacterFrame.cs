@@ -1,4 +1,6 @@
-﻿namespace Lf2datConverter
+﻿using System.Collections.Generic;
+
+namespace Lf2datConverter
 {
     class CharacterFrame
     {
@@ -12,6 +14,7 @@
         public int DVY;
         public int DVZ;
         public int CenterX;
+        public int CenterY;
         public int HitA;
         public int HitD;
         public int HitJ;
@@ -24,10 +27,6 @@
         public int HitJA;
         public int MP;
         public string Sound;
-        public WeaponPoint WeaponPoint;
-        public ObjectPoint ObjectPoint;
-        public CatchingPoint CatchingPoint;
-        public CaughtPoint CaughtPoint;
-
+        public List<IFrameElement> FrameElements = new List<IFrameElement>();
     }
 }

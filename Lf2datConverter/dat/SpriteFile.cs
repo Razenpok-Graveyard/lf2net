@@ -1,6 +1,6 @@
 ﻿namespace Lf2datConverter
 {
-    class SpriteFile
+    public class SpriteFile
     {
         public int StartID;
         public int FinishID;

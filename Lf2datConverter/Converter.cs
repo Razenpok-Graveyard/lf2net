@@ -8,16 +8,28 @@ using System.Threading.Tasks;
 
 namespace Lf2datConverter
 {
-    public struct Block
+    public abstract class Block
     {
         public string Name;
-        public Dictionary<string, string> Fields;
+        public Dictionary<string, string> Fields = new Dictionary<string, string>();
+    }
 
-        public Block(string name)
-        {
-            Name = name;
-            Fields = new Dictionary<string, string>();
-        }
+    public class BmpBlock : Block
+    {
+        public List<SpriteFile> SpriteFiles = new List<SpriteFile>();
+    }
+
+    public class FrameBlock : Block
+    {
+        public List<FrameElementBlock> FrameElements = new List<FrameElementBlock>();
+    }
+
+    public class FrameElementBlock : Block { }
+
+    public class Dat
+    {
+        public BmpBlock Bmp;
+        public List<FrameBlock> Frames= new List<FrameBlock>();
     }
 
     static class Converter
@@ -30,31 +42,39 @@ namespace Lf2datConverter
             return character;
         }
 
-        private static List<Block> GetBlocks(IEnumerable<string> lines)
+        private static Dat GetBlocks(IEnumerable<string> lines)
         {
-            var blocks = new List<Block>();
-            var currentBlock = new Block();
-            var currentFrameElement = "";
-            var currentFrameElementContents = "";
+            var dat = new Dat();
+            var bmp = new BmpBlock {Name = "bmp"};
+            var currentFrame = new FrameBlock();
+            var currentFields = new Dictionary<string, string>();
+            FrameElementBlock currentFrameElement = null;
             foreach (var line in lines)
             {
                 if (line.Contains("<bmp_begin>"))
                 {
-                    currentBlock = new Block("bmp");
                     continue;
                 }
                 if (line.Contains("<frame>"))
                 {
-                    currentBlock = new Block("frame");
                     var firstLine = line.Substring(8).Split(' ');
-                    currentBlock.Fields.Add("Number", firstLine[0]);
-                    currentBlock.Fields.Add("Name", firstLine[1]);
+                    currentFrame = new FrameBlock {Name = "frame"};
+                    currentFields.Add("Number", firstLine[0]);
+                    currentFields.Add("Name", firstLine[1]);
                     continue;
                 }
-                if (line.Contains("<bmp_end>") || line.Contains("<frame_end>"))
+                if (line.Contains("<bmp_end>"))
                 {
-                    blocks.Add(currentBlock);
-                    currentBlock = new Block();
+                    bmp.Fields = currentFields;
+                    dat.Bmp = bmp;
+                    currentFields = new Dictionary<string, string>();
+                }
+                if (line.Contains("<frame_end>"))
+                {
+                    currentFrame.Fields = currentFields;
+                    dat.Frames.Add(currentFrame);
+                    currentFrame = new FrameBlock();
+                    currentFields = new Dictionary<string, string>();
                     continue;
                 }
                 var parts = line.Split(new[] {" ", ":"}, StringSplitOptions.RemoveEmptyEntries);
@@ -63,121 +83,161 @@ namespace Lf2datConverter
                 {
                     if (parts[0].Contains("end"))
                     {
-                        if (currentBlock.Fields.ContainsKey(currentFrameElement))
+                        if (currentFrameElement != null)
                         {
-                            currentBlock.Fields[currentFrameElement] += " | " + currentFrameElementContents;
+                            currentFrame.FrameElements.Add(currentFrameElement);
                         }
-                        else
-                        {
-                            currentBlock.Fields.Add(currentFrameElement, currentFrameElementContents);
-                        }
-                        currentFrameElement = "";
-                        currentFrameElementContents = "";
+                        currentFrameElement = null;
                     }
                     else
                     {
-                        currentFrameElement = parts[0];
+                        currentFrameElement = new FrameElementBlock {Name = parts[0]};
                     }
                     continue;
                 }
                 if (parts[0].Contains("file"))
                 {
-                    if (!currentBlock.Fields.ContainsKey("SpriteFiles"))
-                    {
-                        currentBlock.Fields["SpriteFiles"] = "";
-                    }
-                    currentBlock.Fields["SpriteFiles"] += line + " | ";
+                    bmp.SpriteFiles.Add(ParseSpriteFile(parts));
                     continue;
                 }
-                if (currentFrameElement != "")
+                var targetFields = currentFrameElement != null ? currentFrameElement.Fields : currentFields;
+                for (var i = 0; i < parts.Length; i += 2)
                 {
-                    currentFrameElementContents += line;
-                }
-                else
-                {
-                    for (var i = 0; i < parts.Length; i += 2)
-                    {
-                        currentBlock.Fields.Add(parts[i], parts[i+1]);
-                    }
+                    targetFields.Add(parts[i], parts[i+1]);
                 }
             }
-            return blocks;
+            return dat;
         }
 
-        private static Character ParseCharacter(List<Block> blocks)
+        private static Character ParseCharacter(Dat dat)
         {
-            var result = ParseBmp(blocks.First());
+            var result = ParseBmp(dat.Bmp);
             if (result == null) return null;
-            result.Frames = blocks.Skip(1)
+            result.Frames = dat.Frames
                 .Select(ParseFrame)
                 .ToList();
             return result;
         }
 
-        private static Character ParseBmp(Block block)
+        private static Character ParseBmp(BmpBlock bmpBlock)
         {
-            var character = new Character();
-            if (block.Name != "bmp")
+            if (bmpBlock.Name != "bmp")
                 return null;
-            var fields = block.Fields;
-            character.Name = fields["name"];
-            character.Head = fields["head"];
-            character.Small = fields["small"];
-            var files = fields["SpriteFiles"].Split('|')
-                .Select(file => file.Split(new[] {" ", ":"}, StringSplitOptions.RemoveEmptyEntries));
-            foreach (var file in files.Where(file => file.Length > 0))
+            var fields = bmpBlock.Fields;
+            var character = new Character
             {
-                character.SpriteFiles.Add(ParseSpriteFile(file));
-            }
-            character.WalkingFrameRate = ParseInt(fields["walking_frame_rate"]);
-            character.WalkingSpeed = ParseFloat(fields["walking_speed"]);
-            character.WalkingSpeedZ = ParseFloat(fields["walking_speedz"]);
-            character.RunningFrameRate = ParseInt(fields["running_frame_rate"]);
-            character.RunningSpeed = ParseFloat(fields["running_speed"]);
-            character.RunningSpeedZ = ParseFloat(fields["running_speedz"]);
-            character.HeavyWalkingSpeed = ParseFloat(fields["heavy_walking_speed"]);
-            character.HeavyWalkingSpeedZ = ParseFloat(fields["heavy_walking_speedz"]);
-            character.HeavyRunningSpeed = ParseFloat(fields["heavy_running_speed"]);
-            character.HeavyRunningSpeedZ = ParseFloat(fields["heavy_running_speedz"]);
-            character.JumpHeight = ParseFloat(fields["jump_height"]);
-            character.JumpDistance = ParseFloat(fields["jump_distance"]);
-            character.JumpDistanceZ = ParseFloat(fields["jump_distancez"]);
-            character.DashHeight = ParseFloat(fields["dash_height"]);
-            character.DashDistance = ParseFloat(fields["dash_distance"]);
-            character.DashDistanceZ = ParseFloat(fields["dash_distancez"]);
-            character.RowingHeight = ParseFloat(fields["rowing_height"]);
-            character.RowingDistance = ParseFloat(fields["rowing_distance"]);
+                Name = ParseString(fields, "name"),
+                Head = ParseString(fields, "head"),
+                Small = ParseString(fields, "small"),
+                SpriteFiles = bmpBlock.SpriteFiles,
+                WalkingFrameRate = ParseInt(fields, "walking_frame_rate"),
+                WalkingSpeed = ParseFloat(fields, "walking_speed"),
+                WalkingSpeedZ = ParseFloat(fields, "walking_speedz"),
+                RunningFrameRate = ParseInt(fields, "running_frame_rate"),
+                RunningSpeed = ParseFloat(fields, "running_speed"),
+                RunningSpeedZ = ParseFloat(fields, "running_speedz"),
+                HeavyWalkingSpeed = ParseFloat(fields, "heavy_walking_speed"),
+                HeavyWalkingSpeedZ = ParseFloat(fields, "heavy_walking_speedz"),
+                HeavyRunningSpeed = ParseFloat(fields, "heavy_running_speed"),
+                HeavyRunningSpeedZ = ParseFloat(fields, "heavy_running_speedz"),
+                JumpHeight = ParseFloat(fields, "jump_height"),
+                JumpDistance = ParseFloat(fields, "jump_distance"),
+                JumpDistanceZ = ParseFloat(fields, "jump_distancez"),
+                DashHeight = ParseFloat(fields, "dash_height"),
+                DashDistance = ParseFloat(fields, "dash_distance"),
+                DashDistanceZ = ParseFloat(fields, "dash_distancez"),
+                RowingHeight = ParseFloat(fields, "rowing_height"),
+                RowingDistance = ParseFloat(fields, "rowing_distance")
+            };
             return character;
         }
 
-        private static float ParseFloat(string s)
+        private static float ParseFloat(Dictionary<string, string> dict, string key)
         {
-            return float.Parse(s, CultureInfo.InvariantCulture);
+            string s;
+            return dict.TryGetValue(key, out s) ? float.Parse(s, CultureInfo.InvariantCulture) : 0;
         }
 
-        private static int ParseInt(string s)
+        private static int ParseInt(Dictionary<string, string> dict, string key)
         {
-            return int.Parse(s);
+            string s;
+            return dict.TryGetValue(key, out s) ? int.Parse(s) : 0;
+        }
+
+        private static string ParseString(Dictionary<string, string> dict, string key)
+        {
+            string s;
+            return dict.TryGetValue(key, out s) ? s : "";
         }
 
         private static SpriteFile ParseSpriteFile(IReadOnlyList<string> parts)
         {
-            var file = new SpriteFile();
             var id = parts[0].Substring(4).Trim('(', ')').Split('-');
-            file.StartID = ParseInt(id[0]);
-            file.FinishID = ParseInt(id[1]);
-            file.Path = parts[1];
-            file.Width = ParseInt(parts[3]);
-            file.Height = ParseInt(parts[5]);
-            file.Rows = ParseInt(parts[7]);
-            file.Columns = ParseInt(parts[9]);
+            var file = new SpriteFile
+            {
+                StartID = int.Parse(id[0]),
+                FinishID = int.Parse(id[1]),
+                Path = parts[1],
+                Width = int.Parse(parts[3]),
+                Height = int.Parse(parts[5]),
+                Rows = int.Parse(parts[7]),
+                Columns = int.Parse(parts[9])
+            };
             return file;
         }
 
-        private static CharacterFrame ParseFrame(Block block)
+        private static CharacterFrame ParseFrame(FrameBlock block)
         {
-            var result = new CharacterFrame();
-            return result;
+            if (block.Name != "frame")
+                return null;
+            var fields = block.Fields;
+            var frame = new CharacterFrame
+            {
+                Number = ParseInt(fields, "Number"),
+                Name = ParseString(fields, "Name"),
+                Picture = ParseInt(fields, "pic"),
+                State = ParseInt(fields, "state"),
+                Wait = ParseInt(fields, "wait"),
+                Next = ParseInt(fields, "next"),
+                DVX = ParseInt(fields, "dvx"),
+                DVY = ParseInt(fields, "dvy"),
+                DVZ = ParseInt(fields, "dvz"),
+                CenterX = ParseInt(fields, "centerx"),
+                CenterY = ParseInt(fields, "centery"),
+                HitA = ParseInt(fields, "hit_a"),
+                HitD = ParseInt(fields, "hit_d"),
+                HitJ = ParseInt(fields, "hit_j"),
+                HitFA = ParseInt(fields, "hit_Fa"),
+                HitFJ = ParseInt(fields, "hit_Fj"),
+                HitUA = ParseInt(fields, "hit_Ua"),
+                HitUJ = ParseInt(fields, "hit_Uj"),
+                HitDA = ParseInt(fields, "hit_Da"),
+                HitDJ = ParseInt(fields, "hit_Dj"),
+                HitJA = ParseInt(fields, "hit_ja"),
+                MP = ParseInt(fields, "mp"),
+                Sound = ParseString(fields, "sound"),
+                FrameElements = block.FrameElements.Select(ParseFrameElement).ToList()
+            };
+            return frame;
+        }
+
+        private static IFrameElement ParseFrameElement(FrameElementBlock block)
+        {
+            IFrameElement frameElement = null;
+            var fields = block.Fields;
+            switch (block.Name)
+            {
+                case "wpoint":
+                {
+                    var weaponPoint = new WeaponPoint();
+                    weaponPoint.Kind = ParseInt(fields, "kind");
+                    frameElement = weaponPoint;
+                    break;
+                }
+            }
+            return frameElement;
         }
     }
 }
+
+
