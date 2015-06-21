@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class CatchingPoint : FrameElement, IPointFrameElement, IMovementProducingElement, IDamagingElement
+    class CatchingPoint : FrameElement, IPointFrameElement, IForceElement, IDamagingElement
         ,ICoveringElement
     {
         public int VAction;

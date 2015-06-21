@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class NormalHit: Interaction, IMovementProducingElement, IHittableInteraction, IDamagingElement
+    class NormalHit: Interaction, IForceElement, IHittableInteraction, IDamagingElement
         , IFallPointDealerInteraction, IZVerticalInteraction, IDefendableInteraction
     {
         public int ARest;

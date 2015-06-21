@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class WeaponStrength: Interaction, IDamagingElement, IMovementProducingElement, IFallPointDealerInteraction
+    class WeaponStrength: Interaction, IDamagingElement, IForceElement, IFallPointDealerInteraction
         , IDefendableInteraction
     {
         public int Injury { get; set; }

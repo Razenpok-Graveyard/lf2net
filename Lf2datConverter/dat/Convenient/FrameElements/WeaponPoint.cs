@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class WeaponPoint: FrameElement, IPointFrameElement, IMovementProducingElement, ICoveringElement
+    class WeaponPoint: FrameElement, IPointFrameElement, IForceElement, ICoveringElement
     {
         public int Kind;
         public int WeaponAct;

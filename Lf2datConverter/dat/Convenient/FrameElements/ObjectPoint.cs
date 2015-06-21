@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class ObjectPoint: FrameElement, IPointFrameElement, IMovementProducingElement
+    class ObjectPoint: FrameElement, IPointFrameElement, IForceElement
     {
         public int Kind;
         public int Action;

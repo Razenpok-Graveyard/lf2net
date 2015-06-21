@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class Falling: Interaction, IHittableInteraction, IDamagingElement, IMovementProducingElement
+    class Falling: Interaction, IHittableInteraction, IDamagingElement, IForceElement
         , IFallPointDealerInteraction, IDefendableInteraction
     {
         public int VRest { get; set; }

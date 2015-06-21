@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class FrostWhirlWind: Interaction, IMovementProducingElement, IHittableInteraction, IDamagingElement
+    class WhirlWind: Interaction, IForceElement, IHittableInteraction, IDamagingElement
         , IFallPointDealerInteraction, IZVerticalInteraction, IDefendableInteraction
     {
         public Vector3 VelocityDelta { get; set; }
