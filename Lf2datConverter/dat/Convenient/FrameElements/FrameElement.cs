@@ -2,7 +2,7 @@
 
 namespace Lf2datConverter.dat.Convenient
 {
-    abstract class FrameElement
+    public class FrameElement
     {
         public string Name;
 

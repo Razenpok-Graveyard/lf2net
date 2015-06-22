@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Lf2datConverter.dat.Convenient
 {
-    class CharacterFrame
+    public class CharacterFrame
     {
         public int FrameNumber;
         public string Name;

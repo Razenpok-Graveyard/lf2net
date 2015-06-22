@@ -15,8 +15,8 @@ namespace Lf2datConverter
             var convCharacter = new Character
             {
                 Name = character.Name,
-                Head = character.Head,
-                Small = character.Small,
+                HeadPicture = character.Head,
+                SmallPicture = character.Small,
                 SpriteFiles = character.SpriteFiles.Select(ConvertSpriteFile).ToList(),
                 WalkingFrameRate = character.WalkingFrameRate,
                 WalkingSpeed = new Vector3(character.WalkingSpeed, 0, character.WalkingSpeedZ),
@@ -24,10 +24,8 @@ namespace Lf2datConverter
                 RunningSpeed = new Vector3(character.RunningSpeed, 0, character.RunningSpeedZ),
                 HeavyWalkingSpeed = new Vector3(character.HeavyWalkingSpeed, 0, character.HeavyWalkingSpeedZ),
                 HeavyRunningSpeed = new Vector3(character.HeavyRunningSpeed, 0, character.HeavyRunningSpeedZ),
-                JumpHeight = character.JumpHeight,
-                JumpDistance = new Vector3(character.JumpDistance, 0, character.JumpDistanceZ),
-                DashHeight = character.DashHeight,
-                DashDistance = new Vector3(character.DashDistance, 0, character.DashDistanceZ),
+                JumpDistance = new Vector3(character.JumpDistance, character.JumpHeight, character.JumpDistanceZ),
+                DashDistance = new Vector3(character.DashDistance, character.DashHeight, character.DashDistanceZ),
                 RowingHeight = character.RowingHeight,
                 RowingDistance = character.RowingDistance,
                 Frames = character.Frames.Select(ConvertCharacterFrame).ToList()

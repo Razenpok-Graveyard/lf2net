@@ -9,8 +9,9 @@ namespace Lf2net
 {
 	class BattleField
 	{
-		private List<BasicCharacter> characters = new List<BasicCharacter>();
+		private List<Character> characters = new List<Character>();
 		private Texture2D floor;
+        Vector2 pos = new Vector2(100, 0);
 
 		public int Width
 		{
@@ -27,10 +28,10 @@ namespace Lf2net
 			this.floor = floor;
 		}
 
-		public void AddCharacter(BasicCharacter basicCharacter)
+		public void AddCharacter(Character character)
 		{
-			characters.Add(basicCharacter);
-			basicCharacter.Position = new Vector2(100, 100);
+			characters.Add(character);
+			//character.Position = new Vector2(100, 100);
 		}
 
 		public void Update()
@@ -46,11 +47,12 @@ namespace Lf2net
 			var floorOrigin = new Vector2(0, spriteBatch.GraphicsDevice.Viewport.Height - Height);
 			spriteBatch.Begin();
 			spriteBatch.Draw(floor, floorOrigin);
-			spriteBatch.End();
 			foreach (var character in characters)
 			{
-				character.Draw(spriteBatch, floorOrigin);
-			}
+                spriteBatch.Draw(character.CurrentFrame.Picture, floorOrigin + pos);
+			    //character.Draw(spriteBatch, floorOrigin);
+            }
+            spriteBatch.End();
 		}
 	}
 }
