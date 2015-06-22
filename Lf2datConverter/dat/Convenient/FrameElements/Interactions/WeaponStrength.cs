@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Lf2datConverter.dat.Convenient
+namespace LF2datConverter.dat.Convenient
 {
     class WeaponStrength: Interaction, IDamagingElement, IForceElement, IFallPointDealerInteraction
         , IDefendableInteraction

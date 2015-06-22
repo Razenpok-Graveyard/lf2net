@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lf2datConverter.dat.Base
+namespace LF2datConverter.dat.Base
 {
     class CharacterFrame
     {

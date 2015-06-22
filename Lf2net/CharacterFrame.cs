@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Lf2net
+namespace LF2Net
 {
     public class CharacterFrame
     {
         public Texture2D Picture;
+        public CharacterFrame NextFrame;
+        public int Next;
+        public int FrameNumber;
+        public int Wait;
 
-        public CharacterFrame(Lf2datConverter.dat.Convenient.CharacterFrame frame, List<Texture2D> sprites)
+        public CharacterFrame(LF2datConverter.dat.Convenient.CharacterFrame frame, List<Texture2D> sprites)
         {
+            Next = frame.Next;
             Picture = sprites[frame.Pic];
+            FrameNumber = frame.FrameNumber;
+            Wait = frame.Wait;
         }
     }
 }

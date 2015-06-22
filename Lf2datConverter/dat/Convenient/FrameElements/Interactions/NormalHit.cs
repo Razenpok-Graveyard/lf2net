@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Lf2datConverter.dat.Convenient
+namespace LF2datConverter.dat.Convenient
 {
     class NormalHit: Interaction, IForceElement, IHittableInteraction, IDamagingElement
         , IFallPointDealerInteraction, IZVerticalInteraction, IDefendableInteraction

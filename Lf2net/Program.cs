@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lf2net
+namespace LF2Net
 {
 #if WINDOWS || LINUX
     /// <summary>

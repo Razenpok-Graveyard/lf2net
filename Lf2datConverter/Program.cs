@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Lf2datConverter
+namespace LF2datConverter
 {
     static class Program
     {

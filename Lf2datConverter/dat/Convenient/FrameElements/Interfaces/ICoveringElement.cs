@@ -1,4 +1,4 @@
-﻿namespace Lf2datConverter.dat.Convenient
+﻿namespace LF2datConverter.dat.Convenient
 {
     public interface ICoveringElement
     {

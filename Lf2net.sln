@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lf2net", "Lf2net\Lf2net.csproj", "{B271FAAC-C9C9-4506-9D07-8FA455B7CFF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LF2Net", "Lf2net\LF2Net.csproj", "{B271FAAC-C9C9-4506-9D07-8FA455B7CFF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lf2datConverter", "Lf2datConverter\Lf2datConverter.csproj", "{9F7ADD3E-AC53-46C5-A632-A78F870CEAEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LF2datConverter", "Lf2datConverter\LF2datConverter.csproj", "{9F7ADD3E-AC53-46C5-A632-A78F870CEAEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LF2NetCore", "LF2NetCore\LF2NetCore.csproj", "{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,16 @@ Global
 		{9F7ADD3E-AC53-46C5-A632-A78F870CEAEB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9F7ADD3E-AC53-46C5-A632-A78F870CEAEB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9F7ADD3E-AC53-46C5-A632-A78F870CEAEB}.Release|x86.ActiveCfg = Release|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A0271A95-39E1-47ED-AA30-2FA1B80A3B48}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Lf2net
+namespace LF2Net
 {
     /// <summary>
     /// This is the main type for your game.

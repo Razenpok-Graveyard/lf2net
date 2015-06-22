@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lf2datConverter
+namespace LF2datConverter
 {
     static class Decryptor
     {

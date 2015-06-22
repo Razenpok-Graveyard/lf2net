@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lf2datConverter.dat.Convenient;
+using LF2datConverter.dat.Convenient;
 using Microsoft.Xna.Framework;
 
-namespace Lf2datConverter
+namespace LF2datConverter
 {
     static class ConvenientConverter
     {

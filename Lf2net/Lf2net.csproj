@@ -73,9 +73,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lf2datConverter\Lf2datConverter.csproj">
+    <ProjectReference Include="..\Lf2datConverter\LF2datConverter.csproj">
       <Project>{9f7add3e-ac53-46c5-a632-a78f870ceaeb}</Project>
-      <Name>Lf2datConverter</Name>
+      <Name>LF2datConverter</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

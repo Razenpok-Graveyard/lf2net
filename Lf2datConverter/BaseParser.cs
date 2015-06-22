@@ -5,9 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Lf2datConverter.dat.Base;
+using LF2datConverter.dat.Base;
 
-namespace Lf2datConverter
+namespace LF2datConverter
 {
     public abstract class Block
     {

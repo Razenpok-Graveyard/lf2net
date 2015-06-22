@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 
-namespace Lf2net
+namespace LF2Net
 {
     public class Character
     {
@@ -18,7 +18,7 @@ namespace Lf2net
         public Character(string path, string name, ContentManager contentManager)
         {
             var convCharacter =
-                JsonConvert.DeserializeObject<Lf2datConverter.dat.Convenient.Character>(File.ReadAllText("Content/" + path + name + ".json"));
+                JsonConvert.DeserializeObject<LF2datConverter.dat.Convenient.Character>(File.ReadAllText("Content/" + path + name + ".json"));
             var sprites = new List<Texture2D>();
             foreach (var spriteFile in convCharacter.SpriteFiles)
             {
@@ -28,6 +28,12 @@ namespace Lf2net
                         spriteFile.Columns, spriteFile.FinishID - spriteFile.StartID + 1));
             }
             frames = convCharacter.Frames.Select(frame => new CharacterFrame(frame, sprites)).ToList();
+            foreach (var frame in frames)
+            {
+                if (frame.Next == 999)
+                    frame.Next = 0;
+                frame.NextFrame = frames.Find(f => f.FrameNumber == frame.Next);
+            }
             debugEnumerator = frames.GetEnumerator();
             debugEnumerator.MoveNext();
             CurrentFrame = frames.First();
@@ -36,14 +42,14 @@ namespace Lf2net
         public void Update()
         {
             count++;
-            if (count < 8) return;
+            if (count < CurrentFrame.Wait * 2) return;
             count = 0;
             if (!debugEnumerator.MoveNext())
             {
                 debugEnumerator.Reset();
                 debugEnumerator.MoveNext();
             }
-            CurrentFrame = debugEnumerator.Current;
+            CurrentFrame = CurrentFrame.NextFrame;
         }
 
         private IEnumerable<Texture2D> SplitSpriteSheet(Texture2D origin, int width, int height, int rows, int columns, int count)

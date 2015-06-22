@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LF2datConverter.dat.Convenient
+namespace LF2NetCore
 {
-    interface IFallPointDealerInteraction
+    public class Class1
     {
-        int FallPoints { get; set; }
     }
 }

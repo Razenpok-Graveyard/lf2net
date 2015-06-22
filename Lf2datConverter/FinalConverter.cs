@@ -1,4 +1,4 @@
-﻿namespace Lf2datConverter
+﻿namespace LF2datConverter
 {
     static class FinalConverter
     {
