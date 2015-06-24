@@ -12,17 +12,16 @@ namespace LF2Net
     {
         private List<CharacterFrame> frames;
         public CharacterFrame CurrentFrame;
-        private IEnumerator<CharacterFrame> debugEnumerator; 
         private int count;
 
         public Character(string path, string name, ContentManager contentManager)
         {
             var convCharacter =
-                JsonConvert.DeserializeObject<LF2datConverter.dat.Convenient.Character>(File.ReadAllText("Content/" + path + name + ".json"));
+                JsonConvert.DeserializeObject<LF2NetCore.Character>(File.ReadAllText("Content/" + path + name + ".json"));
             var sprites = new List<Texture2D>();
             foreach (var spriteFile in convCharacter.SpriteFiles)
             {
-                var spriteSheet = contentManager.Load<Texture2D>(path + spriteFile.Sprite.Split('.').First());
+                var spriteSheet = contentManager.Load<Texture2D>(path + spriteFile.Filename.Split('.').First());
                 sprites.InsertRange(spriteFile.StartID,
                     SplitSpriteSheet(spriteSheet, spriteFile.Width, spriteFile.Height, spriteFile.Rows,
                         spriteFile.Columns, spriteFile.FinishID - spriteFile.StartID + 1));
@@ -34,8 +33,6 @@ namespace LF2Net
                     frame.Next = 0;
                 frame.NextFrame = frames.Find(f => f.FrameNumber == frame.Next);
             }
-            debugEnumerator = frames.GetEnumerator();
-            debugEnumerator.MoveNext();
             CurrentFrame = frames.First();
         }
 
@@ -44,11 +41,6 @@ namespace LF2Net
             count++;
             if (count < CurrentFrame.Wait * 2) return;
             count = 0;
-            if (!debugEnumerator.MoveNext())
-            {
-                debugEnumerator.Reset();
-                debugEnumerator.MoveNext();
-            }
             CurrentFrame = CurrentFrame.NextFrame;
         }
 

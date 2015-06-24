@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using LF2NetCore;
 using Newtonsoft.Json;
 
 namespace LF2datConverter
@@ -14,64 +15,42 @@ namespace LF2datConverter
         {
             var fileName = "davis.dat";//Console.ReadLine();
             if (fileName == null || !File.Exists(fileName)) return;
+            var objectName = fileName.Split('.')[0];
             // First 123 bytes of lf2 .dat files are useless
             var bytes = File.ReadAllBytes(fileName)
                 .Skip(123);
             var text = Decryptor.DecryptByteSequence(bytes);
             var baseCharacter = BaseParser.ParseDat(text);
-            File.WriteAllText(fileName.Split('.')[0] + ".txt", text);
+            File.WriteAllText(objectName + ".txt", text);
             var json = JsonConvert.SerializeObject(baseCharacter, Formatting.Indented);
-            File.WriteAllText(fileName.Split('.')[0] + "_base.json", json);
+            File.WriteAllText(objectName + "_base.json", json);
             var convenientCharacter = ConvenientConverter.ConvertToConvenientCharacter(baseCharacter);
             json = JsonConvert.SerializeObject(convenientCharacter, Formatting.Indented);
-            File.WriteAllText(fileName.Split('.')[0] + "_conv.json", json);
-            ExtractCharacter(convenientCharacter);
-            //var finalCharacter = FinalConverter.ConvertCharacter(convenientCharacter);
-            //json = JsonConvert.SerializeObject(finalCharacter, Formatting.Indented);
-            //File.WriteAllText(fileName.Split('.')[0] + ".json", json);
+            File.WriteAllText(objectName + "_conv.json", json);
+            var coreCharacter = CoreConverter.ConvertConvenient(convenientCharacter);
+            GenerateFiles(coreCharacter);
+            json = JsonConvert.SerializeObject(coreCharacter, Formatting.Indented);
+            File.WriteAllText(coreCharacter.Name + "/" + objectName + ".json", json);
         }
 
-        private static void ExtractCharacter(dat.Convenient.Character character)
+        private static void GenerateFiles(Character character)
         {
             var dirName = character.Name;
             if (!Directory.Exists(dirName))
                 Directory.CreateDirectory(dirName);
-            NormalizeFiles(character);
             CreateFile(dirName, character.HeadPicture);
             CreateFile(dirName, character.SmallPicture);
-            foreach (var fileName in character.SpriteFiles)
+            foreach (var file in character.SpriteFiles)
             {
-                CreateFile(dirName, fileName.Sprite);
+                CreateFile(dirName, file.Filename);
             }
-            var json = JsonConvert.SerializeObject(character, Formatting.Indented);
-            File.WriteAllText(dirName + @"\" + dirName + ".json", json);
         }
 
         private static void CreateFile(string directory, string name)
         {
-            var filePath = directory + @"\" + name;
+            var filePath = directory + "/" + name;
             if (!File.Exists(filePath))
                 File.Create(filePath);
-        }
-
-        private static void NormalizeFiles(dat.Convenient.Character character)
-        {
-            character.HeadPicture = ConvertPicture(character.HeadPicture);
-            character.SmallPicture = ConvertPicture(character.SmallPicture);
-            foreach (var file in character.SpriteFiles)
-            {
-                file.Sprite = ConvertPicture(file.Sprite);
-            }
-        }
-
-        private static string ConvertPicture(string oldPath)
-        {
-            return oldPath.Split('\\').Last().Split('.').First() + ".png";
-        }
-
-        private static string ConvertSound(string oldPath)
-        {
-            return oldPath.Split('\\').Last().Split('.').First() + ".wav";
         }
     }
 }

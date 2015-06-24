@@ -110,13 +110,19 @@
     <Compile Include="dat\Convenient\FrameElements\WeaponPoint.cs" />
     <Compile Include="dat\Convenient\SpriteFile.cs" />
     <Compile Include="Decryptor.cs" />
-    <Compile Include="FinalConverter.cs" />
+    <Compile Include="CoreConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LF2NetCore\LF2NetCore.csproj">
+      <Project>{a0271a95-39e1-47ed-aa30-2fa1b80a3b48}</Project>
+      <Name>LF2NetCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

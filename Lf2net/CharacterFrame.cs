@@ -16,7 +16,7 @@ namespace LF2Net
         public int FrameNumber;
         public int Wait;
 
-        public CharacterFrame(LF2datConverter.dat.Convenient.CharacterFrame frame, List<Texture2D> sprites)
+        public CharacterFrame(LF2NetCore.CharacterFrame frame, List<Texture2D> sprites)
         {
             Next = frame.Next;
             Picture = sprites[frame.Pic];

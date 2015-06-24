@@ -73,14 +73,18 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lf2datConverter\LF2datConverter.csproj">
-      <Project>{9f7add3e-ac53-46c5-a632-a78f870ceaeb}</Project>
-      <Name>LF2datConverter</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\Lf2datConverter\bin\Debug\Davis\Davis.json">
+      <Link>Content\Characters\Davis\Davis.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LF2NetCore\LF2NetCore.csproj">
+      <Project>{a0271a95-39e1-47ed-aa30-2fa1b80a3b48}</Project>
+      <Name>LF2NetCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
