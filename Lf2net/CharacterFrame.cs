@@ -15,6 +15,7 @@ namespace LF2Net
         public int Next;
         public int FrameNumber;
         public int Wait;
+        public Dictionary<LF2NetCore.Controls, int> Actions;
 
         public CharacterFrame(LF2NetCore.CharacterFrame frame, List<Texture2D> sprites)
         {
@@ -22,6 +23,7 @@ namespace LF2Net
             Picture = sprites[frame.Pic];
             FrameNumber = frame.FrameNumber;
             Wait = frame.Wait;
+            Actions = frame.Actions;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace LF2Net
 	{
 		private List<Character> characters = new List<Character>();
 		private Texture2D floor;
-        Vector2 pos = new Vector2(100, 0);
+		Vector2 pos = new Vector2(100, 0);
 
 		public int Width
 		{
@@ -47,12 +47,11 @@ namespace LF2Net
 			var floorOrigin = new Vector2(0, spriteBatch.GraphicsDevice.Viewport.Height - Height);
 			spriteBatch.Begin();
 			spriteBatch.Draw(floor, floorOrigin);
+			spriteBatch.End();
 			foreach (var character in characters)
 			{
-                spriteBatch.Draw(character.CurrentFrame.Picture, floorOrigin + pos);
-			    //character.Draw(spriteBatch, floorOrigin);
-            }
-            spriteBatch.End();
+				character.Draw(spriteBatch, floorOrigin + pos);
+			}
 		}
 	}
 }

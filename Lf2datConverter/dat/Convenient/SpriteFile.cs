@@ -7,7 +7,7 @@
         public string Sprite;
         public int Width;
         public int Height;
-        public int Rows;
-        public int Columns;
+        public int PicturesInRow;
+        public int PicturesInColumn;
     }
 }

@@ -1,18 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using LF2NetCore;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json;
 
 namespace LF2Net
 {
     public class Character
     {
+        public Dictionary<Keys, Controls> Controls = new Dictionary<Keys, Controls>(); 
         private List<CharacterFrame> frames;
         public CharacterFrame CurrentFrame;
-        private int count;
+        private int tillNextFrame;
+        private bool facingRight = true;
 
         public Character(string path, string name, ContentManager contentManager)
         {
@@ -33,15 +37,41 @@ namespace LF2Net
                     frame.Next = 0;
                 frame.NextFrame = frames.Find(f => f.FrameNumber == frame.Next);
             }
-            CurrentFrame = frames.First();
+            AssignCurrentFrame(frames.First());
         }
 
         public void Update()
         {
-            count++;
-            if (count < CurrentFrame.Wait * 2) return;
-            count = 0;
-            CurrentFrame = CurrentFrame.NextFrame;
+            tillNextFrame--;
+            if (tillNextFrame > 0) return;
+            if (!HandleControls())
+                AssignCurrentFrame(CurrentFrame.NextFrame);
+        }
+
+        private void AssignCurrentFrame(CharacterFrame frame)
+        {
+            CurrentFrame = frame;
+            tillNextFrame = (frame.Wait + 1) * 2;
+        }
+
+        private bool HandleControls()
+        {
+            var pressed =
+                Controls.Where(key => Keyboard.GetState().IsKeyDown(key.Key)).ToList();
+            if (!pressed.Any()) return false;
+            var pressedControls = pressed.Select(key => key.Value).ToList();
+            var pressedKeys = pressed.Select(key => key.Key).ToList();
+            var nextFrames =
+                pressedControls.Where(control => CurrentFrame.Actions.ContainsKey(control))
+                    .Select(control => CurrentFrame.Actions[control]);
+            var nextFrameNumber = nextFrames.First();
+            var nextFrame = frames.First(frame => frame.FrameNumber == nextFrameNumber);
+            AssignCurrentFrame(nextFrame);
+            if (pressedKeys.Contains(Keys.Right))
+                facingRight = true;
+            if (pressedKeys.Contains(Keys.Left))
+                facingRight = false;
+            return true;
         }
 
         private IEnumerable<Texture2D> SplitSpriteSheet(Texture2D origin, int width, int height, int rows, int columns, int count)
@@ -61,6 +91,14 @@ namespace LF2Net
             origin.GetData(0, sourceRectangle, data, 0, data.Length);
             frame.SetData(data);
             return frame;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            var reversed = facingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            spriteBatch.Begin();
+            spriteBatch.Draw(CurrentFrame.Picture, position, effects:reversed);
+            spriteBatch.End();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using LF2NetCore;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -51,14 +53,17 @@ namespace LF2Net
         {
             var testBfFloor = Content.Load<Texture2D>("bg/cuhk/floor3");
             testBF = new BattleField(testBfFloor);
-            /*var textureDavis = Content.Load<Texture2D>("Characters/Davis/davis_0");
-            var davisAtlas = new BasicSpriteAtlas(textureDavis, 7, 10);
-            var davisIdle = new BasicAnimation(davisAtlas, new[] { 0, 1, 2, 3 });
-            var davisWalk = new BasicAnimation(davisAtlas, new[] { 4, 5, 6, 7, 6, 5 });
-            var davisRun = new BasicAnimation(davisAtlas, new[] { 20, 21, 22, 21 });
-            var davis = new BasicCharacter(testBF, davisIdle, davisWalk, davisRun);*/
-            var newDavis = new Character(DavisPath, "Davis", Content);
-            testBF.AddCharacter(newDavis);
+            var davis = new Character(DavisPath, "Davis", Content)
+            {
+                Controls = new Dictionary<Keys, Controls>()
+                {
+                    {Keys.Right, Controls.Right},
+                    {Keys.Left, Controls.Left},
+                    {Keys.Up, Controls.Up},
+                    {Keys.Down, Controls.Down}
+                }
+            };
+            testBF.AddCharacter(davis);
         }
 
         /// <summary>

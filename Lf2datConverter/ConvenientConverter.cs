@@ -38,10 +38,10 @@ namespace LF2datConverter
         {
             var convFile = new SpriteFile
             {
-                Columns = file.Col,
+                PicturesInColumn = file.Col,
                 FinishID = file.FinishID,
                 Height = file.H,
-                Rows = file.Row,
+                PicturesInRow = file.Row,
                 Sprite = file.Sprite,
                 StartID = file.StartID,
                 Width = file.W
