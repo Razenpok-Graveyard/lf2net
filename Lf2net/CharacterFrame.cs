@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Content;
+﻿using System.Collections.Generic;
+using LF2NetCore;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace LF2Net
@@ -15,7 +11,7 @@ namespace LF2Net
         public int Next;
         public int FrameNumber;
         public int Wait;
-        public Dictionary<LF2NetCore.Controls, int> Actions;
+        public Dictionary<Controls, int> Actions;
 
         public CharacterFrame(LF2NetCore.CharacterFrame frame, List<Texture2D> sprites)
         {

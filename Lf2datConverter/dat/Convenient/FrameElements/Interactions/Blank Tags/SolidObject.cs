@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LF2datConverter.dat.Convenient
+﻿namespace LF2datConverter.dat.Convenient
 {
     class SolidObject : HittableObject
     {

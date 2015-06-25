@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using LF2NetCore;
-using Newtonsoft.Json;
 
 namespace LF2datConverter
 {
@@ -22,7 +20,7 @@ namespace LF2datConverter
 
         private static SpriteFile ConvertSpriteFile(dat.Convenient.SpriteFile spriteFile)
         {
-            return new SpriteFile()
+            return new SpriteFile
             {
                 Columns = spriteFile.PicturesInRow,
                 FinishID = spriteFile.FinishID,
@@ -36,7 +34,7 @@ namespace LF2datConverter
 
         private static CharacterFrame ConvertFrame(dat.Convenient.CharacterFrame frame)
         {
-            return new CharacterFrame()
+            return new CharacterFrame
             {
                 FrameNumber = frame.FrameNumber,
                 Next = frame.Next,

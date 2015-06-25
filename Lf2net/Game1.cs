@@ -55,7 +55,7 @@ namespace LF2Net
             testBF = new BattleField(testBfFloor);
             var davis = new Character(DavisPath, "Davis", Content)
             {
-                Controls = new Dictionary<Keys, Controls>()
+                Controls = new Dictionary<Keys, Controls>
                 {
                     {Keys.Right, Controls.Right},
                     {Keys.Left, Controls.Left},

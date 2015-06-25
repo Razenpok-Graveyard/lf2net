@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using LF2datConverter.dat.Base;
 
 namespace LF2datConverter
