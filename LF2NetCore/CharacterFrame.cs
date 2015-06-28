@@ -8,6 +8,7 @@ namespace LF2NetCore
         public int Pic;
         public int Wait;
         public int Next;
+        public bool Interruptable;
         public Dictionary<Controls, int> Actions = new Dictionary<Controls, int>();
     }
 }

@@ -9,6 +9,7 @@ namespace LF2Net
         public Texture2D Picture;
         public CharacterFrame NextFrame;
         public int Wait;
+        public bool Interruptable;
         public Dictionary<Controls, CharacterFrame> Actions = new Dictionary<Controls, CharacterFrame>();
 
         public CharacterFrame(){}

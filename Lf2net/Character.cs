@@ -43,8 +43,9 @@ namespace LF2Net
             alreadyCalculatedUpdate = true;
             var nextFrames = pressedControls
                 .Where(CurrentFrame.Actions.ContainsKey)
-                .Select(control => CurrentFrame.Actions[control]);
-            if (tillNextFrame == 0)
+                .Select(control => CurrentFrame.Actions[control])
+                .ToList();
+            if ((tillNextFrame == 0 || CurrentFrame.Interruptable)&& nextFrames.Any())
                 AssignCurrentFrame(nextFrames.First());
             if (pressedControls.Contains(Controls.Right))
                 facingRight = true;

@@ -6,6 +6,7 @@
         Left,
         Up,
         Down,
-        Jump
+        Jump,
+        Attack
     }
 }

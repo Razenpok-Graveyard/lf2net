@@ -40,7 +40,8 @@ namespace LF2datConverter
                 Next = frame.Next,
                 Pic = frame.Pic,
                 Wait = frame.Wait,
-                Actions = GetFrameActions(frame)
+                Actions = GetFrameActions(frame),
+                Interruptable = frame.State == 0
             };
         }
 
@@ -64,6 +65,8 @@ namespace LF2datConverter
                 actions.Add(Controls.Left, nextFrame);
                 actions.Add(Controls.Right, nextFrame);
                 actions.Add(Controls.Up, nextFrame);
+                actions.Add(Controls.Jump, 210);
+                actions.Add(Controls.Attack, 60);
             }
             return actions;
         }

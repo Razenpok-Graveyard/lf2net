@@ -63,7 +63,9 @@ namespace LF2Net
                     {Keys.Right, Controls.Right},
                     {Keys.Left, Controls.Left},
                     {Keys.Up, Controls.Up},
-                    {Keys.Down, Controls.Down}
+                    {Keys.Down, Controls.Down},
+                    {Keys.Enter, Controls.Attack },
+                    {Keys.Space, Controls.Jump }
                 }
             };
             testBF.AddCharacter(davis);

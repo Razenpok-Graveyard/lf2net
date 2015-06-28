@@ -43,6 +43,7 @@ namespace LF2Net.Loaders
                 var frame = GetFromDictionary(frameLibrary, characterFrame.FrameNumber);
                 frame.Picture = sprites[characterFrame.Pic];
                 frame.Wait = characterFrame.Wait;
+                frame.Interruptable = characterFrame.Interruptable;
                 var frameNumber = characterFrame.Next >= 999 ? 0 : characterFrame.Next;
                 frame.NextFrame = GetFromDictionary(frameLibrary, frameNumber);
                 foreach (var action in characterFrame.Actions)
