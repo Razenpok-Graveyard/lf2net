@@ -9,7 +9,7 @@ namespace LF2Net
 
         public static KeyboardState LastKeyboardState { get; private set; }
 
-        public InputHandler(Game game): base(game)
+        public InputHandler(Microsoft.Xna.Framework.Game game): base(game)
         {
             KeyboardState = Keyboard.GetState();
         }

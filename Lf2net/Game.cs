@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using LF2Net.Loaders;
 using LF2NetCore;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,15 +11,14 @@ namespace LF2Net
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-        public const string DavisPath = "Characters/Davis/";
         private BattleField testBF;
+        private GameContent content;
 
-        public Game1()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -53,7 +54,9 @@ namespace LF2Net
         {
             var testBfFloor = Content.Load<Texture2D>("bg/cuhk/floor3");
             testBF = new BattleField(testBfFloor);
-            var davis = new Character(DavisPath, "Davis", Content)
+            content = ContentLoader.LoadContent(this);
+            var davis = content.characters.First();
+            var player = new Player(davis)
             {
                 Controls = new Dictionary<Keys, Controls>
                 {
