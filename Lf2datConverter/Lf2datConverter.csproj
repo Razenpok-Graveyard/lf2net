@@ -43,7 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConvenientConverter.cs" />
+    <Compile Include="dat\BaseParser.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\CatchBody.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\CatchDOP.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\Falling.cs" />
@@ -60,7 +60,6 @@
     <Compile Include="dat\Base\FrameElements\Interactions\WeaponStrength.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\WindWhirlWind.cs" />
     <Compile Include="dat\Base\FrameElements\Interactions\SonataOfDeath2.cs" />
-    <Compile Include="BaseParser.cs" />
     <Compile Include="dat\Base\Character.cs" />
     <Compile Include="dat\Base\CharacterFrame.cs" />
     <Compile Include="dat\Base\FrameElements\BloodPoint.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="dat\Base\FrameElements\ObjectPoint.cs" />
     <Compile Include="dat\Base\FrameElements\WeaponPoint.cs" />
     <Compile Include="dat\Base\SpriteFile.cs" />
+    <Compile Include="dat\ConvenientConverter.cs" />
     <Compile Include="dat\Convenient\Character.cs" />
     <Compile Include="dat\Convenient\CharacterFrame.cs" />
     <Compile Include="dat\Convenient\FrameElements\BloodPoint.cs" />

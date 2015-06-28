@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using LF2datConverter.dat.Base;
 
-namespace LF2datConverter
+namespace Lf2datConverter.dat
 {
     public abstract class Block
     {

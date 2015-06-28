@@ -23,11 +23,11 @@ using WeaponPoint = LF2datConverter.dat.Base.WeaponPoint;
 using WeaponStrength = LF2datConverter.dat.Base.WeaponStrength;
 using WindWhirlWind = LF2datConverter.dat.Base.WindWhirlWind;
 
-namespace LF2datConverter
+namespace Lf2datConverter.dat
 {
     static class ConvenientConverter
     {
-        public static Character ConvertToConvenientCharacter(dat.Base.Character character)
+        public static Character ConvertToConvenientCharacter(LF2datConverter.dat.Base.Character character)
         {
             var convCharacter = new Character
             {
@@ -51,7 +51,7 @@ namespace LF2datConverter
             return convCharacter;
         }
 
-        private static SpriteFile ConvertSpriteFile(dat.Base.SpriteFile file)
+        private static SpriteFile ConvertSpriteFile(LF2datConverter.dat.Base.SpriteFile file)
         {
             var convFile = new SpriteFile
             {
@@ -66,7 +66,7 @@ namespace LF2datConverter
             return convFile;
         }
 
-        private static CharacterFrame ConvertCharacterFrame(dat.Base.CharacterFrame frame)
+        private static CharacterFrame ConvertCharacterFrame(LF2datConverter.dat.Base.CharacterFrame frame)
         {
             var convFrame = new CharacterFrame
             {
@@ -95,7 +95,7 @@ namespace LF2datConverter
             return convFrame;
         }
 
-        private static FrameElement ConvertFrameElement(dat.Base.FrameElement frameElement)
+        private static FrameElement ConvertFrameElement(LF2datConverter.dat.Base.FrameElement frameElement)
         {
             FrameElement convFrameElement = null;
             switch (frameElement.Name)
@@ -104,7 +104,7 @@ namespace LF2datConverter
                 {
                     var weaponPoint = frameElement as WeaponPoint;
                     if (weaponPoint != null)
-                        convFrameElement = new dat.Convenient.WeaponPoint
+                        convFrameElement = new LF2datConverter.dat.Convenient.WeaponPoint
                         {
                             Kind = weaponPoint.Kind,
                             Attacking = weaponPoint.Attacking,
@@ -120,7 +120,7 @@ namespace LF2datConverter
                     var objectPoint = frameElement as ObjectPoint;
                     if (objectPoint != null)
                     {
-                        convFrameElement = new dat.Convenient.ObjectPoint
+                        convFrameElement = new LF2datConverter.dat.Convenient.ObjectPoint
                         {
                             Action = objectPoint.Action,
                             Facing = objectPoint.Facing,
@@ -137,7 +137,7 @@ namespace LF2datConverter
                     var catchingPoint = frameElement as CatchingPoint;
                     if (catchingPoint != null)
                     {
-                        convFrameElement = new dat.Convenient.CatchingPoint
+                        convFrameElement = new LF2datConverter.dat.Convenient.CatchingPoint
                         {
                             AAction = catchingPoint.AAction,
                             Cover = catchingPoint.Cover,
@@ -160,7 +160,7 @@ namespace LF2datConverter
                     var caughtPoint = frameElement as CaughtPoint;
                     if (caughtPoint != null)
                     {
-                        convFrameElement = new dat.Convenient.CaughtPoint
+                        convFrameElement = new LF2datConverter.dat.Convenient.CaughtPoint
                         {
                             BackHurtAct = caughtPoint.BackHurtAct,
                             FrontHurtAct = caughtPoint.FrontHurtAct,
@@ -174,7 +174,7 @@ namespace LF2datConverter
                     var bloodPoint = frameElement as BloodPoint;
                     if (bloodPoint != null)
                     {
-                        convFrameElement = new dat.Convenient.BloodPoint
+                        convFrameElement = new LF2datConverter.dat.Convenient.BloodPoint
                         {
                             Position = new Point(bloodPoint.X, bloodPoint.Y)
                         };
@@ -186,7 +186,7 @@ namespace LF2datConverter
                     var body = frameElement as Body;
                     if (body != null)
                     {
-                        convFrameElement = new dat.Convenient.Body
+                        convFrameElement = new LF2datConverter.dat.Convenient.Body
                         {
                             Area = new Rectangle(body.X, body.Y, body.W, body.H),
                             Kind = body.Kind
@@ -199,7 +199,7 @@ namespace LF2datConverter
                     var normalHit = frameElement as NormalHit;
                     if (normalHit != null)
                     {
-                        convFrameElement = new dat.Convenient.NormalHit
+                        convFrameElement = new LF2datConverter.dat.Convenient.NormalHit
                         {
                             Area = new Rectangle(normalHit.X, normalHit.Y, normalHit.W, normalHit.H),
                             ARest = normalHit.ARest,
@@ -219,7 +219,7 @@ namespace LF2datConverter
                     var catchDoP = frameElement as CatchDoP;
                     if (catchDoP != null)
                     {
-                        convFrameElement = new dat.Convenient.CatchDoP
+                        convFrameElement = new LF2datConverter.dat.Convenient.CatchDoP
                         {
                             Area = new Rectangle(catchDoP.X, catchDoP.Y, catchDoP.W, catchDoP.H),
                             CatchingActBack = catchDoP.CatchingActBack,
@@ -235,7 +235,7 @@ namespace LF2datConverter
                     var pickWeapon = frameElement as PickWeapon;
                     if (pickWeapon != null)
                     {
-                        convFrameElement = new dat.Convenient.PickWeapon
+                        convFrameElement = new LF2datConverter.dat.Convenient.PickWeapon
                         {
                             Area = new Rectangle(pickWeapon.X, pickWeapon.Y, pickWeapon.W, pickWeapon.H),
                             VRest = pickWeapon.VRest
@@ -248,7 +248,7 @@ namespace LF2datConverter
                     var catchBody = frameElement as CatchBody;
                     if (catchBody != null)
                     {
-                        convFrameElement = new dat.Convenient.CatchBody
+                        convFrameElement = new LF2datConverter.dat.Convenient.CatchBody
                         {
                             Area = new Rectangle(catchBody.X, catchBody.Y, catchBody.W, catchBody.H),
                             CatchingActBack = catchBody.CatchingActBack,
@@ -264,7 +264,7 @@ namespace LF2datConverter
                     var falling = frameElement as Falling;
                     if (falling != null)
                     {
-                        convFrameElement = new dat.Convenient.Falling
+                        convFrameElement = new LF2datConverter.dat.Convenient.Falling
                         {
                             Area = new Rectangle(falling.X, falling.Y, falling.W, falling.H),
                             BDefend = falling.BDefend,
@@ -281,7 +281,7 @@ namespace LF2datConverter
                     var weaponStrength = frameElement as WeaponStrength;
                     if (weaponStrength != null)
                     {
-                        convFrameElement = new dat.Convenient.WeaponStrength
+                        convFrameElement = new LF2datConverter.dat.Convenient.WeaponStrength
                         {
                             Area = new Rectangle(weaponStrength.X, weaponStrength.Y, weaponStrength.W, weaponStrength.H),
                             BDefend = weaponStrength.BDefend,
@@ -297,7 +297,7 @@ namespace LF2datConverter
                     var superPunch = frameElement as SuperPunch;
                     if (superPunch != null)
                     {
-                        convFrameElement = new dat.Convenient.SuperPunch
+                        convFrameElement = new LF2datConverter.dat.Convenient.SuperPunch
                         {
                             Area = new Rectangle(superPunch.X, superPunch.Y, superPunch.W, superPunch.H),
                             VRest = superPunch.VRest
@@ -310,7 +310,7 @@ namespace LF2datConverter
                     var pickWeapon2 = frameElement as PickWeapon2;
                     if (pickWeapon2 != null)
                     {
-                        convFrameElement = new dat.Convenient.PickWeapon2
+                        convFrameElement = new LF2datConverter.dat.Convenient.PickWeapon2
                         {
                             Area = new Rectangle(pickWeapon2.X, pickWeapon2.Y, pickWeapon2.W, pickWeapon2.H),
                             VRest = pickWeapon2.VRest
@@ -323,7 +323,7 @@ namespace LF2datConverter
                     var healBall = frameElement as HealBall;
                     if (healBall != null)
                     {
-                        convFrameElement = new dat.Convenient.HealBall
+                        convFrameElement = new LF2datConverter.dat.Convenient.HealBall
                         {
                             Area = new Rectangle(healBall.X, healBall.Y, healBall.W, healBall.H),
                             Injury = healBall.Injury,
@@ -337,7 +337,7 @@ namespace LF2datConverter
                     var reflectiveShield = frameElement as ReflectiveShield;
                     if (reflectiveShield != null)
                     {
-                        convFrameElement = new dat.Convenient.ReflectiveShield
+                        convFrameElement = new LF2datConverter.dat.Convenient.ReflectiveShield
                         {
                             Area = new Rectangle(reflectiveShield.X, reflectiveShield.Y, reflectiveShield.W, reflectiveShield.H),
                             FallPoints = reflectiveShield.Fall,
@@ -353,7 +353,7 @@ namespace LF2datConverter
                     var sonataOfDeath = frameElement as SonataOfDeath;
                     if (sonataOfDeath != null)
                     {
-                        convFrameElement = new dat.Convenient.SonataOfDeath
+                        convFrameElement = new LF2datConverter.dat.Convenient.SonataOfDeath
                         {
                             Area = new Rectangle(sonataOfDeath.X, sonataOfDeath.Y, sonataOfDeath.W, sonataOfDeath.H),
                             Injury = sonataOfDeath.Injury,
@@ -368,7 +368,7 @@ namespace LF2datConverter
                     var sonataOfDeath2 = frameElement as SonataOfDeath2;
                     if (sonataOfDeath2 != null)
                     {
-                        convFrameElement = new dat.Convenient.SonataOfDeath2
+                        convFrameElement = new LF2datConverter.dat.Convenient.SonataOfDeath2
                         {
                             Area = new Rectangle(sonataOfDeath2.X, sonataOfDeath2.Y, sonataOfDeath2.W, sonataOfDeath2.H),
                             Injury = sonataOfDeath2.Injury,
@@ -383,7 +383,7 @@ namespace LF2datConverter
                     var solidObject = frameElement as SolidObject;
                     if (solidObject != null)
                     {
-                        convFrameElement = new dat.Convenient.SolidObject
+                        convFrameElement = new LF2datConverter.dat.Convenient.SolidObject
                         {
                             Area = new Rectangle(solidObject.X, solidObject.Y, solidObject.W, solidObject.H),
                             VRest = solidObject.VRest
@@ -396,7 +396,7 @@ namespace LF2datConverter
                     var windWhirlWind = frameElement as WindWhirlWind;
                     if (windWhirlWind != null)
                     {
-                        convFrameElement = new dat.Convenient.WindWhirlWind
+                        convFrameElement = new LF2datConverter.dat.Convenient.WindWhirlWind
                         {
                             Area = new Rectangle(windWhirlWind.X, windWhirlWind.Y, windWhirlWind.W, windWhirlWind.H),
                             BDefend = windWhirlWind.BDefend,
@@ -414,7 +414,7 @@ namespace LF2datConverter
                     var frostWhirlWind = frameElement as FrostWhirlWind;
                     if (frostWhirlWind != null)
                     {
-                        convFrameElement = new dat.Convenient.FrostWhirlWind
+                        convFrameElement = new LF2datConverter.dat.Convenient.FrostWhirlWind
                         {
                             Area = new Rectangle(frostWhirlWind.X, frostWhirlWind.Y, frostWhirlWind.W, frostWhirlWind.H),
                             BDefend = frostWhirlWind.BDefend,

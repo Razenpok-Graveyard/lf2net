@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using Lf2datConverter.dat;
 using LF2NetCore;
 using Newtonsoft.Json;
 
