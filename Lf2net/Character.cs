@@ -37,11 +37,7 @@ namespace LF2Net
 
         public void HandleControls(List<Controls> pressedControls)
         {
-            var nextFrames =
-                pressedControls.Where(control => CurrentFrame.Actions.ContainsKey(control))
-                    .Select(control => CurrentFrame.Actions[control]);
-            var nextFrameNumber = nextFrames.First();
-            var nextFrame = frames.First(frame => frame.FrameNumber == nextFrameNumber);
+            var nextFrame = CurrentFrame.Actions[pressedControls.First()];
             AssignCurrentFrame(nextFrame);
             if (pressedControls.Contains(Controls.Right))
                 facingRight = true;

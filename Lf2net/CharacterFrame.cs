@@ -8,18 +8,9 @@ namespace LF2Net
     {
         public Texture2D Picture;
         public CharacterFrame NextFrame;
-        public int Next;
-        public int FrameNumber;
         public int Wait;
-        public Dictionary<Controls, int> Actions;
+        public Dictionary<Controls, CharacterFrame> Actions = new Dictionary<Controls, CharacterFrame>();
 
-        public CharacterFrame(LF2NetCore.CharacterFrame frame, List<Texture2D> sprites)
-        {
-            Next = frame.Next;
-            Picture = sprites[frame.Pic];
-            FrameNumber = frame.FrameNumber;
-            Wait = frame.Wait;
-            Actions = frame.Actions;
-        }
+        public CharacterFrame(){}
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -29,20 +30,43 @@ namespace LF2Net.Loaders
             var sprites = new List<Texture2D>();
             foreach (var spriteFile in coreCharacter.SpriteFiles)
             {
-                var fileName = spriteFile.Filename.Split('.').First();
+                var fileName = Path.GetFileNameWithoutExtension(spriteFile.Filename);
+                if (fileName == null) continue;
                 var spriteSheet = contentManager.Load<Texture2D>(Path.Combine(path, fileName));
                 sprites.InsertRange(spriteFile.StartID,
                     SplitSpriteSheet(spriteSheet, spriteFile.Width, spriteFile.Height, spriteFile.Rows,
                         spriteFile.Columns, spriteFile.FinishID - spriteFile.StartID + 1));
             }
-            var frames = coreCharacter.Frames.Select(frame => new CharacterFrame(frame, sprites)).ToList();
-            foreach (var frame in frames)
+            var frameLibrary = new Dictionary<int, CharacterFrame>();
+            foreach (var characterFrame in coreCharacter.Frames)
             {
-                if (frame.Next == 999)
-                    frame.Next = 0;
-                frame.NextFrame = frames.Find(f => f.FrameNumber == frame.Next);
+                var frame = GetFromDictionary(frameLibrary, characterFrame.FrameNumber);
+                frame.Picture = sprites[characterFrame.Pic];
+                frame.Wait = characterFrame.Wait;
+                var frameNumber = characterFrame.Next >= 999 ? 0 : characterFrame.Next;
+                frame.NextFrame = GetFromDictionary(frameLibrary, frameNumber);
+                foreach (var action in characterFrame.Actions)
+                {
+                    frame.Actions.Add(action.Key, GetFromDictionary(frameLibrary, action.Value));
+                }
             }
-            return new Character(frames.First());
+            return new Character(frameLibrary[0]);
+        }
+
+        private static CharacterFrame GetFromDictionary(IDictionary<int, CharacterFrame> library, int index)
+        {
+            if (!library.ContainsKey(index))
+                library.Add(index, new CharacterFrame());
+            return library[index];
+        }
+
+        private static CharacterFrame LoadFromCore(LF2NetCore.CharacterFrame frame, List<Texture2D> sprites)
+        {
+            return new CharacterFrame()
+            {
+                Picture = sprites[frame.Pic],
+                Wait = frame.Wait
+            };
         }
 
         private static IEnumerable<Texture2D> SplitSpriteSheet(Texture2D origin, int width, int height, int rows, int columns, int count)
