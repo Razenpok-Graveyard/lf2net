@@ -4,22 +4,13 @@ using System.Linq;
 
 namespace LF2datConverter
 {
-    static class Decryptor
+    internal static class Decryptor
     {
         private const string EncryptionPhrase = "odBearBecauseHeIsVeryGoodSiuHungIsAGo";
-        static readonly IEnumerator<char> EncryptionKey = EncryptionPhrase.GetEnumerator();
+        private static readonly IEnumerator<char> EncryptionKey = EncryptionPhrase.GetEnumerator();
+        private static readonly Func<byte, char> DecryptByte = b => (char) (b - NextEncryptionByte);
 
-        public static string DecryptByteSequence(IEnumerable<byte> byteStream)
-        {
-            EncryptionKey.Reset();
-            return new string(byteStream
-                .Select(DecryptByte)
-                .ToArray());
-        }
-
-        static readonly Func<byte, char> DecryptByte = b => (char)(b - NextEncryptionByte);
-
-        static byte NextEncryptionByte
+        private static byte NextEncryptionByte
         {
             get
             {
@@ -28,8 +19,14 @@ namespace LF2datConverter
                     EncryptionKey.Reset();
                     EncryptionKey.MoveNext();
                 }
-                return (byte)EncryptionKey.Current;
+                return (byte) EncryptionKey.Current;
             }
+        }
+
+        public static string DecryptByteSequence(IEnumerable<byte> byteStream)
+        {
+            EncryptionKey.Reset();
+            return new string(byteStream.Select(DecryptByte).ToArray());
         }
     }
 }
