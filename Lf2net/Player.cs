@@ -20,7 +20,7 @@ namespace LF2Net
             HandleControls();
         }
 
-        private void HandleControls()
+        public void HandleControls()
         {
             var pressed =
                 Controls.Where(key => InputHandler.KeyDown(key.Key)).ToList();

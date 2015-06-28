@@ -16,6 +16,7 @@ namespace LF2Net
         public CharacterFrame CurrentFrame;
         private int tillNextFrame;
         private bool facingRight = true;
+        private bool alreadyCalculatedUpdate = false;
 
         public Character(CharacterFrame startingFrame)
         {
@@ -24,7 +25,8 @@ namespace LF2Net
 
         public void Update()
         {
-            tillNextFrame--;
+            tillNextFrame-= alreadyCalculatedUpdate ? 0 : 1;
+            alreadyCalculatedUpdate = false;
             if (tillNextFrame > 0) return;
             AssignCurrentFrame(CurrentFrame.NextFrame);
         }
@@ -37,8 +39,13 @@ namespace LF2Net
 
         public void HandleControls(List<Controls> pressedControls)
         {
-            var nextFrame = CurrentFrame.Actions[pressedControls.First()];
-            AssignCurrentFrame(nextFrame);
+            tillNextFrame--;
+            alreadyCalculatedUpdate = true;
+            var nextFrames = pressedControls
+                .Where(CurrentFrame.Actions.ContainsKey)
+                .Select(control => CurrentFrame.Actions[control]);
+            if (tillNextFrame == 0)
+                AssignCurrentFrame(nextFrames.First());
             if (pressedControls.Contains(Controls.Right))
                 facingRight = true;
             if (pressedControls.Contains(Controls.Left))

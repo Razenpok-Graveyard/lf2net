@@ -60,15 +60,6 @@ namespace LF2Net.Loaders
             return library[index];
         }
 
-        private static CharacterFrame LoadFromCore(LF2NetCore.CharacterFrame frame, List<Texture2D> sprites)
-        {
-            return new CharacterFrame()
-            {
-                Picture = sprites[frame.Pic],
-                Wait = frame.Wait
-            };
-        }
-
         private static IEnumerable<Texture2D> SplitSpriteSheet(Texture2D origin, int width, int height, int rows, int columns, int count)
         {
             width++;

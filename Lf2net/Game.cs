@@ -67,6 +67,7 @@ namespace LF2Net
                 }
             };
             testBF.AddCharacter(davis);
+            testBF.AddPlayer(player);
         }
 
         /// <summary>
