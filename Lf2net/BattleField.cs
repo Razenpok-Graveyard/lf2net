@@ -10,17 +10,11 @@ namespace LF2Net
 		private Texture2D floor;
 		Vector2 pos = new Vector2(100, 0);
 
-		public int Width
-		{
-			get { return floor.Width; }
-		}
+		public int Width => floor.Width;
 
-		public int Height
-		{
-			get { return floor.Height; }
-		}
+	    public int Height => floor.Height;
 
-		public BattleField(Texture2D floor)
+	    public BattleField(Texture2D floor)
 		{
 			this.floor = floor;
 		}
