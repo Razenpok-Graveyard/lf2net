@@ -34,7 +34,7 @@ namespace LF2Net
         private void AssignCurrentFrame(CharacterFrame frame)
         {
             CurrentFrame = frame;
-            tillNextFrame = (frame.Wait + 1) * 2;
+            tillNextFrame = frame.Wait;
         }
 
         public void HandleControls(List<Controls> pressedControls)
@@ -57,7 +57,10 @@ namespace LF2Net
         {
             var reversed = facingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             spriteBatch.Begin();
-            spriteBatch.Draw(CurrentFrame.Picture, position, effects:reversed);
+            var offset = -CurrentFrame.Center;
+            if (!facingRight)
+                offset = new Vector2(CurrentFrame.Center.X - CurrentFrame.Picture.Width, -CurrentFrame.Center.Y);
+            spriteBatch.Draw(CurrentFrame.Picture, position + offset, effects:reversed);
             spriteBatch.End();
         }
     }

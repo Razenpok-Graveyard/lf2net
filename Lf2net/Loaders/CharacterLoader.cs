@@ -33,9 +33,9 @@ namespace LF2Net.Loaders
                 var fileName = Path.GetFileNameWithoutExtension(spriteFile.Filename);
                 if (fileName == null) continue;
                 var spriteSheet = contentManager.Load<Texture2D>(Path.Combine(path, fileName));
-                sprites.InsertRange(spriteFile.StartID,
-                    SplitSpriteSheet(spriteSheet, spriteFile.Width, spriteFile.Height, spriteFile.Rows,
-                        spriteFile.Columns, spriteFile.FinishID - spriteFile.StartID + 1));
+                sprites.InsertRange(spriteFile.StartingFrame,
+                    SplitSpriteSheet(spriteSheet, spriteFile.FrameWidth, spriteFile.FrameHeight, spriteFile.Rows,
+                        spriteFile.Columns, spriteFile.FrameCount));
             }
             var frameLibrary = new Dictionary<int, CharacterFrame>();
             foreach (var characterFrame in coreCharacter.Frames)
@@ -43,6 +43,7 @@ namespace LF2Net.Loaders
                 var frame = GetFromDictionary(frameLibrary, characterFrame.FrameNumber);
                 frame.Picture = sprites[characterFrame.Pic];
                 frame.Wait = characterFrame.Wait;
+                frame.Center = characterFrame.Center;
                 frame.Interruptable = characterFrame.Interruptable;
                 var frameNumber = characterFrame.Next >= 999 ? 0 : characterFrame.Next;
                 frame.NextFrame = GetFromDictionary(frameLibrary, frameNumber);
@@ -63,8 +64,6 @@ namespace LF2Net.Loaders
 
         private static IEnumerable<Texture2D> SplitSpriteSheet(Texture2D origin, int width, int height, int rows, int columns, int count)
         {
-            width++;
-            height++;
             return
                 Enumerable.Range(0, count)
                     .Select(frameNumber => GetFrame(origin, width, height, frameNumber / columns, frameNumber % columns));

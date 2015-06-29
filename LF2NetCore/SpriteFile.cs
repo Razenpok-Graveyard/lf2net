@@ -3,10 +3,10 @@
     public class SpriteFile
     {
         public string Filename;
-        public int StartID;
-        public int FinishID;
-        public int Width;
-        public int Height;
+        public int StartingFrame;
+        public int FrameCount;
+        public int FrameWidth;
+        public int FrameHeight;
         public int Rows;
         public int Columns;
     }

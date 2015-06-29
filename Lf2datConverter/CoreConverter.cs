@@ -23,12 +23,12 @@ namespace LF2datConverter
             return new SpriteFile
             {
                 Columns = spriteFile.PicturesInRow,
-                FinishID = spriteFile.FinishID,
-                Height = spriteFile.Height,
+                FrameHeight = spriteFile.Height + 1,
                 Rows = spriteFile.PicturesInColumn,
                 Filename = ExtractPictureName(spriteFile.Sprite),
-                StartID = spriteFile.StartID,
-                Width = spriteFile.Width
+                StartingFrame = spriteFile.StartID,
+                FrameCount = spriteFile.FinishID - spriteFile.StartID + 1,
+                FrameWidth = spriteFile.Width + 1
             };
         }
 
@@ -39,9 +39,10 @@ namespace LF2datConverter
                 FrameNumber = frame.FrameNumber,
                 Next = frame.Next,
                 Pic = frame.Pic,
-                Wait = frame.Wait,
+                Wait = (frame.Wait + 1)*2,
                 Actions = GetFrameActions(frame),
-                Interruptable = frame.State == 0
+                Interruptable = frame.State == 0,
+                Center = frame.Center
             };
         }
 
