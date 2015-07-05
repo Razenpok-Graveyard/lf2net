@@ -13,7 +13,5 @@ namespace LF2Net
         public bool Interruptable;
         public Vector2 Center;
         public Dictionary<Controls, CharacterFrame> Actions = new Dictionary<Controls, CharacterFrame>();
-
-        public CharacterFrame(){}
     }
 }

@@ -7,29 +7,41 @@ namespace LF2Net
 	class BattleField
 	{
 		private List<Character> characters = new List<Character>();
-        private List<Player> players = new List<Player>(); 
+		private List<Player> players = new List<Player>(); 
 		private Texture2D floor;
 		Vector2 pos = new Vector2(100, 0);
 
-		public int Width => floor.Width;
+		public int Width
+		{
+			get { return floor.Width; }
+		}
 
-	    public int Height => floor.Height;
+		public int Height
+		{
+			get { return floor.Height; }
+		}
 
-	    public BattleField(Texture2D floor)
+		public BattleField(Texture2D floor)
 		{
 			this.floor = floor;
 		}
 
-		public void AddCharacter(Character character) => characters.Add(character);
-
-	    public void AddPlayer(Player player) => players.Add(player);
-
-	    public void Update()
+		public void AddCharacter(Character character)
 		{
-	        foreach (var player in players)
-	        {
-	            player.HandleControls();
-	        }
+			characters.Add(character);
+		}
+
+		public void AddPlayer(Player player)
+		{
+			players.Add(player);
+		}
+
+		public void Update()
+		{
+			foreach (var player in players)
+			{
+				player.HandleControls();
+			}
 			foreach (var character in characters)
 			{
 				character.Update();
