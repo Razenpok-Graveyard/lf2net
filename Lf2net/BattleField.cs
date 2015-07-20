@@ -4,11 +4,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LF2Net
 {
-	class BattleField
+	public class BattleField
 	{
 		private List<Character> characters = new List<Character>();
 		private List<Player> players = new List<Player>(); 
 		private Texture2D floor;
+
+		public Rectangle Bounds
+		{
+			get { return floor.Bounds; }
+		}
 
 		public int Width
 		{
@@ -28,6 +33,7 @@ namespace LF2Net
 		public void AddCharacter(Character character)
 		{
 			characters.Add(character);
+			character.BattleField = this;
 		}
 
 		public void AddPlayer(Player player)

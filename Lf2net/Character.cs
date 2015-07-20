@@ -19,6 +19,7 @@ namespace LF2Net
 		private bool alreadyCalculatedUpdate = false;
 		public Vector3 WalkingSpeed;
 		private Vector2 position = new Vector2(100, 0);
+		public BattleField BattleField;
 
 		public Character(CharacterFrame startingFrame)
 		{
@@ -59,6 +60,7 @@ namespace LF2Net
 			if (pressedControls.Contains(Controls.Left))
 				direction += -Vector2.UnitX;
 			position += direction * new Vector2(WalkingSpeed.X/2, WalkingSpeed.Y/2);
+			position = position.Clamp(BattleField.Bounds);
 			if (pressedControls.Contains(Controls.Right))
 				facingRight = true;
 			if (pressedControls.Contains(Controls.Left))

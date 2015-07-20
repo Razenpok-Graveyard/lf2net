@@ -8,8 +8,8 @@
     <ProjectGuid>{B271FAAC-C9C9-4506-9D07-8FA455B7CFF5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lf2net</RootNamespace>
-    <AssemblyName>Lf2net</AssemblyName>
+    <RootNamespace>LF2Net</RootNamespace>
+    <AssemblyName>LF2Net</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <MonoGameContentBuilderExe>
@@ -45,6 +45,7 @@
     <Compile Include="BattleField.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="CharacterFrame.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameContent.cs" />
     <Compile Include="InputHandler.cs" />
