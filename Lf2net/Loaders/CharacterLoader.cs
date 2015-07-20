@@ -52,7 +52,11 @@ namespace LF2Net.Loaders
                     frame.Actions.Add(action.Key, GetFromDictionary(frameLibrary, action.Value));
                 }
             }
-            return new Character(frameLibrary[0]);
+	        var c = new Character(frameLibrary[0])
+	        {
+		        WalkingSpeed = coreCharacter.WalkingSpeed
+	        };
+	        return c;
         }
 
         private static CharacterFrame GetFromDictionary(IDictionary<int, CharacterFrame> library, int index)
